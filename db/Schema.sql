@@ -12,6 +12,7 @@ create table user(
 	First_name varchar(20),
     Last_name varchar(20),
     Email varchar(50),
+    Password varchar(50),
     ID int NOT NULL AUTO_INCREMENT ,
     Phone Numeric,
     User_status Enum("active","inactive"),
