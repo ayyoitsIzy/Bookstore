@@ -1,17 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / Register</title>
 </head>
+
 <body>
 
-  <h1>Login</h1>
+    <header>
+    </header>
 
-  <input id="username" placeholder="Username"><br><br>
-  <input id="password" type="password" placeholder="Password"><br><br>
+    <main>
 
-  <button onclick="login()">Login</button>
+        <section class="auth-container">
 
-  <script src="/JS/login.js"></script>
+            <div class="auth-box login-box">
+                <h2>Welcome</h2>
+
+                <form id="loginForm">
+                    <input type="text" placeholder="Mobile phone number or email" required>
+                    <input type="password" placeholder="Password" required>
+
+                    <div class="row">
+                        <label>
+                            <input type="checkbox"> Remember me
+                        </label>
+
+                        <a href="#" class="link">Forgot password?</a>
+                    </div>
+
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+
+            <div class="auth-box register-box">
+                <h2>Create a new account</h2>
+
+                <form id="registerForm">
+
+                    <div class="row">
+                        <input type="text" placeholder="Name" required>
+                        <input type="text" placeholder="Surname" required>
+                    </div>
+
+                    <input type="text" placeholder="Mobile phone number" required>
+                    <input type="email" placeholder="Email" required>
+                    <input type="password" placeholder="New password" required>
+
+                    <button type="submit">Apply</button>
+                </form>
+
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+    </footer>
+
 </body>
 </html>
