@@ -62,7 +62,7 @@ app.post("/api/login", (req, res) => {
   req.session.login = true
   console.log(req.session.user);
   res.json({ success: true });
-  user2.push(req.body)
+  user2.push(req.body);
 });
 
 
