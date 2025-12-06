@@ -106,7 +106,7 @@ app.post("/api/login", async(req, res) => {
     }
     console.log(check.at(0).password);
     console.log(data.password);
-    if (data.password === check.at(0).Password) { 
+    if (data.password === check.at(0).password) { 
             console.log("correct password");
             req.session.ID = check.at(0).ID;
             req.session.login = true;

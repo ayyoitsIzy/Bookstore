@@ -66,5 +66,5 @@ async function register() {
      return;
    }
 
-  window.location.href = `/test.html`;
+  window.location.href = `/user_info`;
 }
