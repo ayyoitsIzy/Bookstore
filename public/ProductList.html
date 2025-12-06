@@ -27,16 +27,16 @@
     <section class="filter-section">
         <div class="filter-tabs">
             <button>เรียงโดย</button>
-            <button>ล่าสุด</button>
-            <button>สินค้าขายดี</button>
+            <button id = "latest">ล่าสุด</button>
+            <button id = "popular">สินค้าขายดี</button>
             
             <label>ราคา</label>
-            <select></select>
+            <select id = "price"></select>
 
         </div>
     </section>
 
-    <section class="product-grid">
+    <section id="product-grid">
         <div class="product-card">
             <img src="" alt="">
             <h4 class="product-name"></h4>
@@ -46,9 +46,9 @@
 
     
 <div class="pagination">
-    <button class="page-prev"><</button>
-    <button class="page-dots">...</button>
-    <button class="page-next">></button>
+    <button id="page-prev"><</button>
+    <button id="page-dots">...</button>
+    <button id="page-next">></button>
 
     <!-- <button class="page-prev"><</button>
     <button class="page-number">1</button>
@@ -65,5 +65,4 @@
 
 </body>
 </html>
-    <script type="text/javascript" src="/JS/productList.js" defer></script>
 </head>

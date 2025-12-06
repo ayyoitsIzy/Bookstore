@@ -60,11 +60,12 @@ async function register() {
 
 
   const data = await res.json();
+  console.log("done1")
 
    if(!data.success){
      alert("register failed");
      return;
    }
-
+   console.log("done2")
   window.location.href = `/user_info`;
 }

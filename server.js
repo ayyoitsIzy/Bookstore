@@ -44,17 +44,24 @@ app.get("/", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "Login.html"));
+  res.sendFile(path.join(__dirname, "public", "login.html"));
 });
 
 app.get("/user_info", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "Userinfo.html"));
 });
 
+app.get("/product", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "ProductList.html"));
+});
+
+app.get("/product_info", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "Productinfo.html"));
+});
 
 
 // Start server
 const PORT = 3000;
 app.listen(PORT, () =>
-  console.log(`Server running at http://localhost:${PORT}`)
+  console.log(`Server running at http://localhost:${PORT}/product?page=1&orderby=latest`)
 );
