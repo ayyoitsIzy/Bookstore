@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / Register</title>
+    <script type="text/javascript" src="/JS/login.js" defer></script>
+</head>
+
+
+
+<body>
+
+    <header>
+    </header>
+
+    <main>
+
+        <section class="auth-container">
+
+            <div class="auth-box login-box">
+                <h2>Welcome</h2>
+
+                <form id="loginForm">
+                    <input id="username" type="text" placeholder="Mobile phone number or email" required>
+                    <input id="password" type="password" placeholder="Password" required>
+
+                    <div class="row">
+                        <label>
+                            <input type="checkbox"> Remember me
+                        </label>
+
+                        <a href="#" class="link">Forgot password?</a>
+                    </div>
+                    <button onclick="login()">Login</button>
+                    
+                </form>
+            </div>
+
+            <div class="auth-box register-box">
+                <h2>Create a new account</h2>
+
+                <form id="registerForm">
+
+                    <div class="row">
+                        <input id="Name" type="text" placeholder="Name" required>
+                        <input id="Surname" type="text" placeholder="Surname" required>
+                    </div>
+                    
+                    
+                    <input id="Mobile phone number" type="text" placeholder="Mobile phone number" required>
+                    <input id="Email" type="email" placeholder="Email" required>
+                    <input id="New password" type="password" placeholder="New password" required>
+
+                    <button onclick="register()">Apply</button>
+                </form>
+
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+    </footer>
+
+</body>
+</html>
