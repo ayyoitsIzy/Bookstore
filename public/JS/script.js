@@ -1,4 +1,4 @@
-fetch("/api/check_session")
+fetch("/user/check_session")
   .then(res=>res.json())
   .then(data=>{
     if (data.login === false || data.login === undefined){
