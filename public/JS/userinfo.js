@@ -1,4 +1,4 @@
-fetch("/api/user_info")
+fetch("/user/user_info")
   .then(res => res.json())
   .then(data => {
     console.log(data);

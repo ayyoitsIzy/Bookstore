@@ -11,7 +11,7 @@ async function login() {
     let res;
     if (isStringAllNumbers(username)){
         console
-        res = await fetch("/api/login", {
+        res = await fetch("/user/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: 'include',
@@ -21,7 +21,7 @@ async function login() {
         })
     })
     }else{
-        res = await fetch("/api/login", {
+        res = await fetch("/user/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: 'include',
@@ -51,7 +51,7 @@ async function register() {
    
 
   // Send data to backend for validation
-  const res = await fetch("/api/register", {
+  const res = await fetch("/user/register", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     credentials: 'include',
