@@ -2,8 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const session = require("express-session");
-
-
+const pool = require("./db/connection");
+const userRouter = require("./routes/userRouter");
 const app = express();
 
 
@@ -22,7 +22,7 @@ app.use(express.json());
 
 // Serve static files (HTML, CSS, JS)
 app.use(express.static(path.join(__dirname, "public"), { index: false }));
-
+app.use('/user',userRouter);
 // Example API data
 
 
@@ -30,40 +30,23 @@ let user2 = [
   
 ];
 
-//API endpoint
+//page route
 
-app.get("/", (req, res) => {
+app.get("/", async(req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
+   const sql = 'select * from user';
+  const [rows] = await pool.query(sql);
+  //console.log(rows);
 });
 
 app.get("/login", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "login.html"));
+  res.sendFile(path.join(__dirname, "public", "Login.html"));
 });
 
-app.get("/api/check_session",(req,res)=>{
-  res.json(req.session);
-})
-
-app.get("/api/users", (req, res) => {
-  console.log("mock db");
-  res.json(user2);
+app.get("/user_info", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "Userinfo.html"));
 });
 
-app.get("/api/user_session", (req, res) => {
-  console.log("session test");
-  console.log(req.session.user);
-  res.json(req.session.user);
-});
-
-
-app.post("/api/login", (req, res) => {
-  //const { username, password } = req.body;
-  req.session.user = req.body
-  req.session.login = true
-  console.log(req.session.user);
-  res.json({ success: true });
-  user2.push(req.body)
-});
 
 
 // Start server
