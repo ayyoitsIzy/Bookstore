@@ -35,7 +35,6 @@ router.get("/user_session", (req, res) => {
 
 router.post("/login", async(req, res) => {
   let data = req.body;
-  console.log(data);
   if("Email" in data){
     const [check] = await pool.query("select password,ID from user where Email = ?",[data.Email]);
     if (check.length == 0) { 
