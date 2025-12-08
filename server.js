@@ -6,7 +6,7 @@ const pool = require("./db/connection");
 
 const userRouter = require("./routes/userRouter");
 const productRouter = require("./routes/productRouter");
-
+const basketRouter = require("./routes/basketRouter");
 
 const app = express();
 
@@ -29,6 +29,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "public"), { index: false }));
 app.use('/user',userRouter);
 app.use('/product',productRouter);
+app.use('/basket',basketRouter);
 // Example API data
 
 
@@ -64,4 +65,5 @@ app.get("/product_info", (req, res) => {
 const PORT = 3000;
 app.listen(PORT, () =>
   console.log(`Server running at http://localhost:${PORT}/product?page=1&orderby=latest`)
+  //console.log(`Server running at http://localhost:${PORT}/product_info?id=1`)
 );
