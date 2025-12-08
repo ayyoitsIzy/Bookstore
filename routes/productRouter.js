@@ -36,11 +36,8 @@ router.get("/productlist/:page/:orderby", async(req, res)=>{
   }
 
 
-  let sql = "select * from product order by " + sqlorder + " limit 18 offset ?;"
-  console.log(sql,[sqlorder ,(pages-1)*18])
+  let sql = "select product.Prod_ID,Prod_name,Price, MIN(Path) as Thumbnail from product inner join image on product.prod_id = image.prod_id group by product.Prod_ID,Prod_name,Price order by " + sqlorder + " limit 18 offset ?;"
   const [info] = await pool.query(sql,(pages-1)*18);
-  console.log(sql,[sqlorder ,(pages-1)*18])
-  console.log(info);
   res.json(info)
 })
 
@@ -54,6 +51,14 @@ router.get("/product_info/:id", async(req, res)=>{
   const [info] = await pool.query("select * from product where prod_id = ?;",id);
   res.json(info.at(0));
 })
+
+router.get("/product_img/:id",async(req,res)=>{
+  const id = req.params.id
+  const [info] = await pool.query("select * from image where Prod_ID = ?;",id);
+  res.json(info);
+})
+
+
 
 
 module.exports = router;

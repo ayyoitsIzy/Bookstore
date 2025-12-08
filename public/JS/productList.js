@@ -2,11 +2,16 @@
     const grid = document.getElementById("product-grid")
     const listofproduct =  data;
 
+
     for (let i = 0; i<listofproduct.length ;i++){
 
         const productcard = document.createElement("div");
         productcard.className = "product-card";
         
+        const img = document.createElement("img");
+        img.src = listofproduct.at(i).Thumbnail;
+        console.log(listofproduct.at(i).Thumbnail)
+
 
         const h4 = document.createElement("h4");
         h4.textContent = listofproduct.at(i).Prod_name;
@@ -16,6 +21,7 @@
         p.textContent = listofproduct.at(i).Price;
         p.className = "product-price";
 
+        productcard.appendChild(img);
         productcard.appendChild(p);
         productcard.appendChild(h4)
 

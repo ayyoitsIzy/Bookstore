@@ -26,6 +26,7 @@ create table Product(
     Category varchar(20),
     Price NUMERIC ,
     Prod_ID int auto_increment primary key,
+    description varchar(500) DEFAULT  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do aliqua.Ut enim ad minim Lorem ipsum dolor sit amet, consectetur adipiscing elit,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     Product_stock NUMERIC
 );
 
@@ -46,6 +47,12 @@ create table orders(
     primary key(Prod_ID,Bill_ID)
 );
 
+create table image(
+    Path varchar(100),
+    Prod_ID int,
+    foreign key (Prod_ID ) references product(Prod_ID ),
+    primary key(Prod_ID,Path)
+);
 
 create table Custom_Order(
 	Custom_ID NUMERIC PRIMARY KEY,
