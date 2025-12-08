@@ -1,0 +1,101 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+:root {
+    --primary: #ff4f2f;
+    --bg-light: #f5f5f5;
+    --card-bg: #e6e6e6;
+    --text-main: #222222;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    background-color: var(--primary);
+    padding: 14px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.header-left img {
+    width: 90px;
+    height: auto;
+}
+.search-bar {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 0 40px;
+}
+
+.search-bar input {
+    width: 100%;
+    max-width: 420px;
+    padding: 10px 16px;
+    border-radius: 24px;
+    border: none;
+    outline: none;
+    background-color: #ffffff;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    font-size: 14px;
+}
+.header-right {
+    min-width: 80px;
+}
+.user-info-page {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+}
+
+.user-info-box {
+    background-color: var(--card-bg);
+    border-radius: 26px;
+    width: 90%;
+    max-width: 1000px;
+    padding: 32px 40px;
+
+    display: flex;
+    align-items: center;
+    gap: 48px;
+}
+
+.user-avatar img {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #cccccc;
+}
+
+.user-details p {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.user-details p:first-child {
+    margin-top: 4px;
+}
+
+footer {
+    background-color: var(--primary);
+    color: #ffffff;
+    padding: 16px 40px;
+    font-size: 13px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
