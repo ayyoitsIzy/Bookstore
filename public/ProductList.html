@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product List</title>
+    <link rel="stylesheet" href="/CSS/productList.css">
     <script type="text/javascript" src="/JS/productList.js" defer></script>
 </head>
 
@@ -26,38 +27,33 @@
 
     <section class="filter-section">
         <div class="filter-tabs">
-            <button>เรียงโดย</button>
-            <button id = "latest">ล่าสุด</button>
-            <button id = "popular">สินค้าขายดี</button>
+            <button class="filter-label" disabled>เรียงโดย</button>
+            <button id="latest" class="filter-tab">ล่าสุด</button>
+            <button id="popular" class="filter-tab">สินค้าขายดี</button>
             
-            <label>ราคา</label>
-            <select id = "price"></select>
-
+            <div class="price-dropdown-wrapper">
+                <label for="price-sort">ราคา</label>
+                <select id="price-sort">
+                    <option value="" disabled selected>เลือกราคา</option>
+                    <option value="priceup">น้อยไปมาก</option>
+                    <option value="pricedown">มากไปน้อย</option>
+                </select>
+            </div>
         </div>
     </section>
+    <section id="product-grid"></section>
 
-    <section id="product-grid">
-        <div class="product-card">
-            <img src="" alt="">
-            <h4 class="product-name"></h4>
-            <p class="product-price"></p>
-        </div>
-    </section>
-
-    
-<div class="pagination">
-    <button id="page-prev"><</button>
-    <button id="page-dots">...</button>
-    <button id="page-next">></button>
-
+    <div class="pagination">
+        <button id="page-prev"><</button>
+        <button id="page-dots">...</button>
+        <button id="page-next">></button>
     <!-- <button class="page-prev"><</button>
     <button class="page-number">1</button>
     <button class="page-number">2</button>
     <button class="page-number">3</button>
     <button class="page-dots">...</button>
     <button class="page-next">></button> -->
-
-</div>
+    </div>
     
 </main>
 
@@ -65,4 +61,3 @@
 
 </body>
 </html>
-</head>
