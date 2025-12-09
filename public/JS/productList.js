@@ -53,7 +53,7 @@ fetch(string)
  
 }
 
-addtogrid(test());
+test();
 
 const current = document.getElementById("page-dots")
 const prev = document.getElementById("page-prev")

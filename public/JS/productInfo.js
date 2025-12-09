@@ -1,10 +1,10 @@
-async function test(){
+let number = 1;
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 fetch("/product/product_info/"+id)
   .then(res => res.json())
-  .then(data => {
-    let number = 1;
+  .then(async data => {
+
     const show =  document.getElementsByClassName("qty-display")[0];
     const decrease = document.getElementsByClassName("qty-minus")[0];
     const increase = document.getElementsByClassName("qty-plus")[0];
@@ -40,7 +40,7 @@ fetch("/product/product_info/"+id)
   });
   fetch("/product/product_img/"+id)
   .then(res => res.json())
-  .then(data => {
+  .then(async data => {
     const main = document.getElementsByClassName("product-image-large")
     const mainimg = main[0].querySelector("img");
     mainimg.src = data.at(0).Path
@@ -58,7 +58,18 @@ fetch("/product/product_info/"+id)
   .catch(err => {
     console.log(err)
   });
-  return data;
-}
 
-test()
+
+
+  
+const addbutton = document.getElementsByClassName("add-to-cart-btn")[0].addEventListener("click",async ()=>{
+   res = fetch("/basket/add_product", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: 'include',
+        body: JSON.stringify({
+            prod_ID:id,
+            amount:number
+        })
+    })
+})
