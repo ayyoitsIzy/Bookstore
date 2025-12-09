@@ -7,7 +7,7 @@ const pool = require("./db/connection");
 const userRouter = require("./routes/userRouter");
 const productRouter = require("./routes/productRouter");
 const basketRouter = require("./routes/basketRouter");
-
+const promotionRouter = require("./routes/promotionRouter");
 const app = express();
 
 
@@ -21,26 +21,40 @@ app.use(session({
   secret: 'secrete-key',
   resave: false,
   saveUninitialized: false,
+   cookie: { 
+    secure: false, 
+    maxAge: 60*60*1000 
+  }
 }));
 
 app.use(express.json());
+
 
 // Serve static files (HTML, CSS, JS)
 app.use(express.static(path.join(__dirname, "public"), { index: false }));
 app.use('/user',userRouter);
 app.use('/product',productRouter);
 app.use('/basket',basketRouter);
+app.use('/promotion',promotionRouter);
 // Example API data
 
 
-let user2 = [
-  
-];
+
 
 //page route
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
+
+});
+
+app.get("/promotion", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "Promotions.html"));
+
+});
+
+app.get("/basket", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "basket.html"));
 
 });
 
@@ -64,6 +78,7 @@ app.get("/product_info", (req, res) => {
 // Start server
 const PORT = 3000;
 app.listen(PORT, () =>
-  console.log(`Server running at http://localhost:${PORT}/product?page=1&orderby=latest`)
+  //console.log(`Server running at http://localhost:${PORT}/product?page=1&orderby=latest`)
+  console.log(`Server running at http://localhost:${PORT}/promotion?id=1`)
   //console.log(`Server running at http://localhost:${PORT}/product_info?id=1`)
 );

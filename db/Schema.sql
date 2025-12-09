@@ -22,7 +22,7 @@ create table user(
 );
 
 create table Product(
-	Prod_name varchar(20),
+	Prod_name varchar(50),
     Category varchar(20),
     Price NUMERIC ,
     Prod_ID int auto_increment primary key,
@@ -72,6 +72,7 @@ create table promotion(
 	Promotion_Name varchar(20),
     Promotion_ID int auto_increment primary key,
     Price Numeric,
+    Banner varchar(300),
     Start_Date date,
     End_Date date
 );
