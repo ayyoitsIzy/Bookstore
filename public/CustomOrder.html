@@ -40,12 +40,17 @@
                 <label>รอบแขน:</label>
                 <input type="text">
 
-                <label>คณะ:</label>
-                <select></select>
+                <label for="faculty">คณะ:</label>
+                        <select id="faculty">
+                            <option value="" disabled selected>เลือกคณะ</option>
+                            <option value="ENG">วิศวกรรมศาสตร์</option>
+                            <option value="SCI">วิทยาศาสตร์</option>
+                        </select>
 
-                <label>ภาควิชา:</label>
-                <select></select>
-
+                <label for="department">ภาควิชา:</label>
+                        <select id="department" disabled>
+                    <option value="" disabled selected>เลือกภาควิชา</option>
+                        </select>
             </form>
 
             <p class="custom-price">[Price] บาท</p>

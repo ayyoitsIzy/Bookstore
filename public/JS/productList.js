@@ -1,92 +1,101 @@
- function addtogrid(data){
-    const grid = document.getElementById("product-grid")
-    const listofproduct =  data;
+const params = new URLSearchParams(window.location.search);
+let page = parseInt(params.get("page") || "1", 10);
+let orderby = params.get("orderby") || "latest";
+const MAX_PAGE = 30;
+function addtogrid(data) {
+    const grid = document.getElementById("product-grid");
+    const listofproduct = data || [];
 
+    grid.innerHTML = "";
 
-    for (let i = 0; i<listofproduct.length ;i++){
+    for (let i = 0; i < listofproduct.length; i++) {
+        const product = listofproduct[i];
 
         const productcard = document.createElement("div");
         productcard.className = "product-card";
-        
-        const img = document.createElement("img");
-        img.src = listofproduct.at(i).Thumbnail;
-        console.log(listofproduct.at(i).Thumbnail)
 
+        const img = document.createElement("img");
+        img.src = product.Thumbnail;
+        img.alt = product.Prod_name || "";
+        console.log(product.Thumbnail);
 
         const h4 = document.createElement("h4");
-        h4.textContent = listofproduct.at(i).Prod_name;
+        h4.textContent = product.Prod_name;
         h4.className = "product-name";
 
         const p = document.createElement("p");
-        p.textContent = listofproduct.at(i).Price;
+        p.textContent = "฿" + product.Price;
         p.className = "product-price";
-
         productcard.appendChild(img);
+        productcard.appendChild(h4);
         productcard.appendChild(p);
-        productcard.appendChild(h4)
 
         grid.appendChild(productcard);
 
-        productcard.addEventListener("click",() =>{
-            //console.log(listofproduct.at(i).Prod_ID);
-            window.location.href = `/product_info?id=`+listofproduct.at(i).Prod_ID;
+        productcard.addEventListener("click", () => {
+            window.location.href = "/product_info?id=" + product.Prod_ID;
+        });
+    }
+}
+function test() {
+    const url = "/product/productlist/" + page + "/" + orderby;
+
+    fetch(url)
+        .then(res => res.json())
+        .then(data => {
+            addtogrid(data);
         })
-    }
+        .catch(err => {
+            console.log(err);
+        });
 }
- const params = new URLSearchParams(window.location.search);
- const page = params.get("page");
- const orderby = params.get("orderby");
+document.addEventListener("DOMContentLoaded", () => {
+    const current = document.getElementById("page-dots");
+    const prev = document.getElementById("page-prev");
+    const next = document.getElementById("page-next");
 
-async function test(){
+    const priceSort = document.getElementById("price-sort");
+    const popular = document.getElementById("popular");
+    const latest = document.getElementById("latest");
 
- const string = "/product/productlist/" + page + "/"+orderby
+    current.textContent = page;
 
-fetch(string)
-  .then(res => res.json())
-  .then(data => {
-    addtogrid(data)
-  })
-  .catch(err => {
-    console.log(err)
-  });
-
- 
-}
-
-test();
-
-const current = document.getElementById("page-dots")
-const prev = document.getElementById("page-prev")
-const next = document.getElementById("page-next")
-
-const price = document.getElementById("price")
-const popular = document.getElementById("popular")
-const latest = document.getElementById("latest")
-
-current.textContent = page;
-
-price.addEventListener("click",() =>{
-    if (orderby === "priceup"){
-        window.location.href = "/product?page=" + page + "&orderby=pricedown"
-    }else{
-        window.location.href = "/product?page=" + page + "&orderby=priceup"
+    if (orderby === "priceup" || orderby === "pricedown") {
+        priceSort.value = orderby;
     }
-    
+    function updateActiveTabs() {
+        latest.classList.toggle("active", orderby === "latest");
+        popular.classList.toggle("active", orderby === "popular");
+    }
+    updateActiveTabs();
 
-})
+    priceSort.addEventListener("change", () => {
+        const value = priceSort.value;
+        if (!value) return;
+        window.location.href = "/product?page=1&orderby=" + value;
+    });
+    popular.addEventListener("click", () => {
+        window.location.href = "/product?page=1&orderby=popular";
+    });
+    latest.addEventListener("click", () => {
+        window.location.href = "/product?page=1&orderby=latest";
+    });
 
-popular.addEventListener("click",() =>{
-    window.location.href = "/product?page=" + page + "&orderby=popular"
-})
-latest.addEventListener("click",() =>{
-    window.location.href = "/product?page=" + page + "&orderby=latest"
-})
-
-next.addEventListener("click",() =>{
-    window.location.href = "/product?page=" + (parseInt(page)+1) + "&orderby="+orderby
-})
-prev.addEventListener("click",() =>{
-    window.location.href = "/product?page=" + (parseInt(page)-1) + "&orderby="+orderby
-})
-
-
+    if (page <= 1) {
+        prev.disabled = true;
+    } else {
+        prev.addEventListener("click", () => {
+            const newPage = page - 1;
+            window.location.href = "/product?page=" + newPage + "&orderby=" + orderby;
+        });
+    }
+    if (page >= MAX_PAGE) {
+        next.disabled = true;
+    } else {
+        next.addEventListener("click", () => {
+            const newPage = page + 1;
+            window.location.href = "/product?page=" + newPage + "&orderby=" + orderby;
+        });
+    }
+    test();
+});
