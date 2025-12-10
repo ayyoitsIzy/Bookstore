@@ -5,9 +5,9 @@ fetch("/product/product_info/"+id)
   .then(res => res.json())
   .then(async data => {
 
-    const show =  document.getElementsByClassName("qty-display")[0];
-    const decrease = document.getElementsByClassName("qty-minus")[0];
-    const increase = document.getElementsByClassName("qty-plus")[0];
+    const show =  document.getElementsByClassName("quantity-display")[0];
+    const decrease = document.getElementsByClassName("quantity-minus")[0];
+    const increase = document.getElementsByClassName("quantity-plus")[0];
     const title = document.getElementById("product-title")
     const price = document.getElementById("product-price")
     const stock = document.getElementById("stock-warning")
