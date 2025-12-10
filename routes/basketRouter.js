@@ -3,7 +3,7 @@ const router = express.Router()
 const pool = require("../db/connection");
 
 
-
+//product//
 router.post("/add_product",(req,res)=>{
 
     if (!Array.isArray(req.session.basket)) {
@@ -26,7 +26,36 @@ router.post("/add_product",(req,res)=>{
     //console.log(req.session.basket);
 })
 
+router.post("/increase_product",async (req,res)=>{
+     const [rows] = await pool.query(`select Product_stock from product where Prod_id = ? `,req.session.basket[req.body.index].prod_ID);
+    console.log(req.session.basket[req.body.index].amount)
+    if (req.session.basket[req.body.index].amount < rows[0].Product_stock) {
+        req.session.basket[req.body.index].amount += 1;
+        res.json({ success: true });
+    } else {
+        res.json({ success: false });
+    }
+    //console.log(req.session.basket);
+})
+router.post("/decrease_product",async (req,res)=>{
+    req.session.basket[req.body.index].amount -=1;
+    console.log(req.session.basket[req.body.index].amount)
+    if (req.session.basket[req.body.index].amount == 0) {
+        req.session.basket.splice(req.body.index,1);
+    } 
+    res.json({ success: true });
+    //console.log(req.session.basket);
+})
+router.post("/delete",async (req,res)=>{
+    req.session.basket.splice(req.body.index,1);
+    res.json({ success: true });
+    //console.log(req.session.basket);
+})
 
+//promotion//
+
+
+//get_basket//
 router.get("/get_basket",async(req,res)=>{
     try {
         let temparray = Array.from(req.session.basket)

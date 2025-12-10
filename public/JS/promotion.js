@@ -1,6 +1,6 @@
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
-
+let basket = {};
 fetch("/promotion/promotion_info/"+id)
   .then(res => res.json()
   .then(async data => {
@@ -17,6 +17,10 @@ fetch("/promotion/promotion_info/"+id)
     discount_percent.textContent = (((data.Original_Price - data.Price)/data.Original_Price) * 100).toFixed(2) + "%" ;
     promotion_title.textContent = data.Promotion_Name;
     promotion_final_price.textContent = data.Price + "บาท";
+    basket.img = data.Banner;
+    basket.Promotion_id = data.Promotion_id;
+    basket.prod_name = data.Promotion_Name;
+    basket.price =data.Price;
   }))
 //   <div class="table-row">
 //                     <div class="product-info">
@@ -28,7 +32,6 @@ fetch("/promotion/promotion_info/"+id)
 //                     <span class="qty">1</span>
 //                     <span class="item-total">300 บาท</span>
 //     </div>
-
 //Prod_name, Thumbnail, price_per_item, amount, total
   fetch("/promotion/promotion_item/"+id)
   .then(res => res.json()
@@ -69,3 +72,4 @@ fetch("/promotion/promotion_info/"+id)
     }
 
   }))
+
