@@ -2,7 +2,7 @@ const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 let basket = {};
 let number = 1;
-const show = document.getElementsByClassName("qty-display")[0]
+const show = document.getElementsByClassName("quantity-display")[0]
 
 fetch("/promotion/promotion_info/"+id)
   .then(res => res.json()
@@ -73,7 +73,7 @@ fetch("/promotion/promotion_info/"+id)
 
     
 
-const addbutton = document.getElementsByClassName("add-promotion-btn")[0].addEventListener("click",async ()=>{
+const addbutton = document.getElementsByClassName("add-promotion")[0].addEventListener("click",async ()=>{
    res = fetch("/basket/add_promotion", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -93,7 +93,7 @@ const addbutton = document.getElementsByClassName("add-promotion-btn")[0].addEve
 fetch("/basket/promotion_limit/"+id)
   .then(res => res.json()
   .then(async data => {
-              const plusbutton = document.getElementsByClassName("qty-plus")[0].addEventListener("click",async ()=>{
+              const plusbutton = document.getElementsByClassName("quantity-plus")[0].addEventListener("click",async ()=>{
              if(number >= data.max ){
                   alert("too Much!")
                   return;
@@ -102,7 +102,7 @@ fetch("/basket/promotion_limit/"+id)
             show.textContent = number;
           })
 
-          const minusbutton = document.getElementsByClassName("qty-minus")[0].addEventListener("click",async ()=>{
+          const minusbutton = document.getElementsByClassName("quantity-minus")[0].addEventListener("click",async ()=>{
             if(number <= 1 ){
               alert("too little!")
               return;
