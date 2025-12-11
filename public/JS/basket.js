@@ -41,7 +41,7 @@
       const minus = document.createElement("button");
       minus.textContent = "-"
       minus.addEventListener("click",async ()=>{
-        let res =  fetch("/basket/decrease_product", {
+        let res =  fetch("/basket/decrease", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: 'include',
@@ -61,22 +61,24 @@
           console.log("deleted")
           basket_row.remove;
           basket_table.removeChild(basket_row);
+          location.reload()
         }
       })
 
       
       const plus = document.createElement("button");
       plus.textContent = "+"
-      plus.addEventListener("click",async ()=>{
-        let res = await fetch("/basket/increase_product", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: 'include',
-        body: JSON.stringify({index : i})
+      if ("promotion_ID" in data[i]) {
+        plus.addEventListener("click", async()=>{
+          let res = await fetch("/basket/increase_promotion", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: 'include',
+          body: JSON.stringify({index : i,promotion_ID:data[i].promotion_ID})
         });
         const status = await res.json();
-        console.log(status.success);
-        if (status.success) {
+         if (status.success) {
+           console.log(data);
           total =  parseInt(total) + parseInt(data[i].price);
           summary_total.textContent = total;
           localamount += 1;
@@ -86,11 +88,42 @@
         } else {
           alert("error");
         }
-      })
+        })
+      } 
+      if ("prod_ID" in data[i]) {
+        plus.addEventListener("click",async ()=>{
+        let res = await fetch("/basket/increase_product", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: 'include',
+        body: JSON.stringify({index : i})
+        });
+        const status = await res.json();
+        if (status.success) {
+           console.log(data);
+          total =  parseInt(total) + parseInt(data[i].price);
+          summary_total.textContent = total;
+          localamount += 1;
+          item_total.textContent = (localamount) * data[i].price
+          console.log(localamount);
+          amount.textContent = parseInt(amount.textContent)+1;
+        } else {
+          alert("error");
+        }
+      }) 
+      }
+
+      
 
       item_qty.appendChild(minus);
       item_qty.appendChild(amount);
       item_qty.appendChild(plus);
+
+      if("name" in data[i])
+        {
+          item_qty.removeChild(minus);
+          item_qty.removeChild(plus);
+        }
 
       const item_total = document.createElement("span");
       item_total.className = "item-total"
@@ -116,6 +149,7 @@
           console.log("deleted")
           basket_row.remove;
           basket_table.removeChild(basket_row);
+          location.reload()
         } else {
           alert("error");
         }
@@ -136,3 +170,15 @@
 
   })
   .catch(err => console.log("Error:", err));
+
+
+
+
+document.getElementsByClassName("checkout-btn")[0].addEventListener("click",() =>{
+  let res =  fetch("/basket/make_bill", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: 'include',
+        body: JSON.stringify()
+        });
+})

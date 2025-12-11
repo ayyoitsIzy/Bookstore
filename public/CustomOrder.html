@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Custom Order</title>
-            <script type="text/javascript" src="JS/CustomOrder.js" defer></script>
+    <script type="text/javascript" src="JS/CustomOrder.js" defer></script>
 
 </head>
 
@@ -31,16 +31,16 @@
             <form>
 
                 <label>ชื่อ-นามสกุล ภาษาอังกฤษ:</label>
-                <input type="text">
+                <input id = "name" type="text">
 
                 <label>รอบอก:</label>
-                <input type="text">
+                <input id = "breast" type="text">
 
                 <label>รอบเอว:</label>
-                <input type="text">
+                <input id = "waist" type="text">
 
                 <label>รอบแขน:</label>
-                <input type="text">
+                <input id = "arm" type="text">
 
                 <label for="faculty">คณะ:</label>
                         <select id="faculty">
@@ -55,9 +55,9 @@
                         </select>
             </form>
 
-            <p class="custom-price">[Price] บาท</p>
+            <p class="custom-price">450 บาท</p>
 
-            <button class="add-to-cart-btn">เพิ่มสินค้าลงในตะกร้า</button>
+            <button class="add-to-cart-btn" onclick="apply()">เพิ่มสินค้าลงในตะกร้า</button>
 
         </div>
 

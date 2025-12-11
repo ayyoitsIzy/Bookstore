@@ -73,12 +73,16 @@ app.get("/product", (req, res) => {
 app.get("/product_info", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "Productinfo.html"));
 });
+app.get("/custom_order", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "CustomOrder.html"));
+});
 
 
 // Start server
 const PORT = 3000;
 app.listen(PORT, () =>
-  console.log(`Server running at http://localhost:${PORT}/product?page=1&orderby=latest`)
+  //console.log(`Server running at http://localhost:${PORT}/product?page=1&orderby=latest`)
   //console.log(`Server running at http://localhost:${PORT}/promotion?id=1`)
   //console.log(`Server running at http://localhost:${PORT}/product_info?id=1`)
+  console.log(`Server running at http://localhost:${PORT}/custom_order`)
 );
