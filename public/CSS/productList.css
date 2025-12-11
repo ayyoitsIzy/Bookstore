@@ -14,7 +14,7 @@
 }
 
 body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     background-color: var(--bg-light);
     color: var(--text-main);
     min-height: 100vh;
@@ -23,7 +23,14 @@ body {
     flex-direction: column;
 }
 
+main {
+    margin-top: 50px;
+}
+
 .header {
+    position: fixed;
+    width: 100vw;
+    z-index: 1;
     background-color: var(--primary);
     padding: 14px 40px;
     display: flex;
@@ -126,15 +133,21 @@ body {
 }
 .filter-tab {
     border-radius: 18px;
-    border: none;
+    border: 1px solid #555555;
     padding: 6px 16px;
     font-size: 14px;
     cursor: pointer;
     background-color: transparent;
     color: #555555;
-    transition: background-color 0.15s ease, color 0.15s ease;
+    transition: background-color 0.15s ease, color 0.15s ease,border-color 0.1s ease-in-out;
+}
+
+
+.filter-tab:hover{
+    border: 1px solid var(--primary);
 }
 .filter-tab.active {
+    border: 1px solid var(--primary);
     background-color: var(--primary);
     color: #ffffff;
 }
@@ -150,13 +163,17 @@ body {
 }
 .price-dropdown-wrapper select {
     border-radius: 18px;
-    border: 1px solid #dddddd;
+    border: 1px solid #c74040;
     padding: 4px 12px;
     font-size: 14px;
     background-color: #ffffff;
     cursor: pointer;
 }
 #product-grid {
+    border: 1px solid #ff861c;
+    border-radius: 40px;
+    background-color: #ffefdd;
+    padding : 50px;
     width: 100%;
     max-width: 1120px;
     margin: 24px auto 32px;
@@ -166,7 +183,7 @@ body {
 }
 
 .product-card {
-    background: linear-gradient(180deg, #ffcfa5 0%, #ffb580 100%);
+    background: linear-gradient(180deg, #ff861c 0%, #ff7818 100%);
     border-radius: 16px;
     padding: 16px 14px 14px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.08);

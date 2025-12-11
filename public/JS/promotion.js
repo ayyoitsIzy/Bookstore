@@ -1,5 +1,8 @@
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
+let basket = {};
+let number = 1;
+const show = document.getElementsByClassName("qty-display")[0]
 
 fetch("/promotion/promotion_info/"+id)
   .then(res => res.json()
@@ -17,20 +20,14 @@ fetch("/promotion/promotion_info/"+id)
     discount_percent.textContent = (((data.Original_Price - data.Price)/data.Original_Price) * 100).toFixed(2) + "%" ;
     promotion_title.textContent = data.Promotion_Name;
     promotion_final_price.textContent = data.Price + "บาท";
+    basket.img = data.Banner;
+    basket.Promotion_id = data.Promotion_id;
+    basket.prod_name = data.Promotion_Name;
+    basket.price =data.Price;
   }))
-//   <div class="table-row">
-//                     <div class="product-info">
-//                         <img src="" alt="">
-//                         <span class="product-name">Seaside Notebook</span>
-//                     </div>
 
-//                     <span class="price-per-unit">300 บาท</span>
-//                     <span class="qty">1</span>
-//                     <span class="item-total">300 บาท</span>
-//     </div>
 
-//Prod_name, Thumbnail, price_per_item, amount, total
-  fetch("/promotion/promotion_item/"+id)
+    fetch("/promotion/promotion_item/"+id)
   .then(res => res.json()
   .then(async data => {
     console.log(data);
@@ -69,3 +66,46 @@ fetch("/promotion/promotion_info/"+id)
     }
 
   }))
+
+    
+
+const addbutton = document.getElementsByClassName("add-promotion-btn")[0].addEventListener("click",async ()=>{
+   res = fetch("/basket/add_promotion", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: 'include',
+        body: JSON.stringify({
+            img : basket.img,
+            prod_name : basket.prod_name,
+            promotion_ID:id,
+            price : basket.price,
+            amount:number
+        })
+    })
+    
+})
+
+
+fetch("/basket/promotion_limit/"+id)
+  .then(res => res.json()
+  .then(async data => {
+              const plusbutton = document.getElementsByClassName("qty-plus")[0].addEventListener("click",async ()=>{
+             if(number >= data.max ){
+                  alert("too Much!")
+                  return;
+            }
+            number += 1;
+            show.textContent = number;
+          })
+
+          const minusbutton = document.getElementsByClassName("qty-minus")[0].addEventListener("click",async ()=>{
+            if(number <= 1 ){
+              alert("too little!")
+              return;
+            }
+            number -= 1;
+            show.textContent = number;
+          })
+  }))
+
+

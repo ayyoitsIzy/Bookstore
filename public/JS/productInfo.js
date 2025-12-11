@@ -62,7 +62,7 @@ fetch("/product/product_info/"+id)
 
 
   
-const addbutton = document.getElementsByClassName("add-to-cart-btn")[0].addEventListener("click",async ()=>{
+const addbutton = document.getElementsByClassName("add-to-cart")[0].addEventListener("click",async ()=>{
    res = fetch("/basket/add_product", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
