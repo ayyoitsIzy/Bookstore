@@ -34,6 +34,7 @@ router.post("/login", async(req, res) => {
     if (data.password === check.at(0).password) { 
             console.log("correct password");
             req.session.ID = check.at(0).ID;
+            req.session.username = check.at(0).First_name;
             req.session.login = true;
             res.json({success: true});
             return;

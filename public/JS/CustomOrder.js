@@ -38,3 +38,25 @@ document.addEventListener("DOMContentLoaded", () => {
         setDepartmentOptions(departmentOptions[facultySelect.value] || null);
     });
 });
+
+function apply(){
+    const dept = document.getElementById("department").value;
+    const name = document.getElementById("name").value;
+    const breast = parseInt(document.getElementById("breast").value);
+    const waist = parseInt(document.getElementById("waist").value);
+    const arm = parseInt(document.getElementById("arm").value);
+    console.log(dept);
+    console.log(name);
+    console.log(breast);
+    console.log(waist);
+    console.log(arm);
+    fetch("/basket/add_custom", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: 'include',
+        body: JSON.stringify({
+            prod_name : name+dept,
+            name,dept,breast,waist,arm
+        })
+    })
+}
