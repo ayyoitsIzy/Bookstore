@@ -25,7 +25,7 @@ fetch("/promotion/promotion_info/"+id)
 //                     </div>
 
 //                     <span class="price-per-unit">300 บาท</span>
-//                     <span class="qty">1</span>
+//                     <span class="quantity">1</span>
 //                     <span class="item-total">300 บาท</span>
 //     </div>
 
@@ -54,7 +54,7 @@ fetch("/promotion/promotion_info/"+id)
         unit_price.textContent = data[i].price_per_item + "บาท"
 
         const amount = document.createElement("span");
-        amount.className = "qty";
+        amount.className = "quantity";
         amount.textContent = data[i].amount
 
         const total = document.createElement("span");

@@ -55,7 +55,7 @@ body {
     font-size: 14px;
 }
 
-.header-right {
+.header-right{
     min-width: 80px;
 }
 
@@ -132,7 +132,7 @@ body {
     cursor: pointer;
     background-color: transparent;
     color: #555555;
-    transition: background-color 0.15s ease, color 0.15s ease;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 .filter-tab.active {
     background-color: var(--primary);
@@ -174,12 +174,12 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
 .product-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 18px rgba(0,0,0,0.16);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.2);
 }
 
 .product-card img {
