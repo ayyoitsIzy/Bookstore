@@ -174,11 +174,17 @@
 
 
 
-document.getElementsByClassName("checkout-btn")[0].addEventListener("click",() =>{
+document.getElementsByClassName("checkout-btn")[0].addEventListener("click",async () =>{
   let res =  fetch("/basket/make_bill", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: 'include',
         body: JSON.stringify()
         });
+      let status = await res.json();
+      if (status.success) {
+        location.reload();
+      } else {
+        alert("error");
+      }
 })

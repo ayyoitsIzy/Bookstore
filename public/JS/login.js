@@ -28,15 +28,17 @@ async function login() {
         body: JSON.stringify({Email : username,password})
         });
     }
+
     const data = await res.json();
 
     if(!data.success){
      alert(data.error);
      return;
    }
+   window.location.href = `/user_info`
 
 
-window.location.href = `/user_info`;
+
 }
 
 

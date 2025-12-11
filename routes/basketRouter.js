@@ -136,7 +136,7 @@ router.get("/get_basket",async(req,res)=>{
         res.json([])
     }
 })
-//make_bill/
+//make_bill/ if anyone is reading this i swear i will fix it later this is very messy i swear i will fix it..............................................maybe
 router.post("/make_bill",async (req,res)=>{
     if (!Array.isArray(req.session.basket) || req.session.basket.length === 0) {
                 res.json({success:false});
@@ -147,33 +147,67 @@ router.post("/make_bill",async (req,res)=>{
     console.log("make_bill");
     res.json({ success: true });
     let product_total = new Map();
+    let product = [];
+    let order = [];
+    let promotion = [];
+    let custom = [];
     for (let i = 0;i<req.session.basket.length;i++){
-        if("prod_ID" in req.session.basket[i]){
-            product_total.set(parseInt(req.session.basket[i].prod_ID),req.session.basket[i].amount);
-            continue;
+        if("prod_ID" in req.session.basket[i] ){
+                const [limit] = await pool.query("select * from product where prod_id = ?",req.session.basket[i].prod_ID)
+                total += limit[0].Price * req.session.basket[i].amount;
+                if(limit[0].Product_stock < req.session.basket[i].amount){res.json({success : false});return;}
+                product_total.set(parseInt(req.session.basket[i].prod_ID),req.session.basket[i].amount);
+                product.push(parseInt(req.session.basket[i].prod_ID));
+                order.push({prod_ID : parseInt(req.session.basket[i].prod_ID) , amount : req.session.basket[i].amount});
+                continue;
         }
-        if("name" in req.session.basket[i]){}
+        if("name" in req.session.basket[i]){
+            custom.push(req.session.basket[i])
+            total += req.session.basket[i].price;
+        }
     }
     console.log(product_total);
      for(let i = 0;i<req.session.basket.length;i++){
          if("promotion_ID" in req.session.basket[i]){
+            total += req.session.basket[i].price * req.session.basket[i].amount;
              const [rows] = await pool.query("select Promotion_ID, Prod_ID, Amount as promotion_amount from promotion_item where promotion_id = ?",req.session.basket[i].promotion_ID)
              for (let j = 0; j < rows.length; j++) {
                 const prod = rows[j].Prod_ID;
-                console.log(prod);
+                const [limit] = await pool.query("select * from product where prod_id = ?",prod)
+                promotion.push({promotion_ID : req.session.basket[i].promotion_ID , amount : req.session.basket[i].amount});
                 if (product_total.get(prod) === undefined) {
+                    if(limit[0].Product_stock < req.session.basket[i].amount * rows[j].promotion_amount){res.json({success : false});return;}
                     product_total.set(prod,req.session.basket[i].amount * rows[j].promotion_amount);
+                    product.push(prod);
                 } else {
                     let original_amount = product_total.get(prod)
                     original_amount += rows[j].promotion_amount * req.session.basket[i].amount;
+                    if(limit[0].Product_stock < original_amount){res.json({success : false});return;}
                     product_total.set(prod,original_amount);
                 }
              }
-
          }
      }
-
     console.log(product_total);
+    console.log(product);
+    console.log(total);
+
+    for(let i = 0;i<product.length;i++){
+        const [rows] = await pool.query("update product set product_stock = product_stock - "+ product_total.get(product[i])+" where prod_id = ?;",product[i]);
+    }
+    const [bill] = await pool.query("INSERT INTO bill (ID, total_price, date) VALUES(?,?,current_time());",[req.session.ID,total]);
+    const bill_id  = bill.insertId;
+    for(let i = 0;i<promotion.length;i++){
+        const [rows] = await pool.query("insert into promotion_order (promotion_id,bill_id,amount) value (?,?,?)",[promotion[i].promotion_ID,bill_id,promotion[i].amount]);
+    }
+    for(let i = 0;i<order.length;i++){
+        const [rows] = await pool.query("insert into orders (promotion_id,bill_id,amount) value",[order[i].promotion_ID,bill_id,order[i].amount]);
+    }
+    // for(let i = 0;i<order.length;i++){
+    //     const [rows] = await pool.query("update product set product_stock = product_stock - "+ product_total.get(product[i])+" where prod_id = ?;",product[i]);
+    // }
+    
+    
 
 })
 
