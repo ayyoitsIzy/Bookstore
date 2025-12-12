@@ -15,9 +15,6 @@
     --border-soft: #e0e0e0;
     --shadow-soft: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
-
-/* ================= HEADER + PAGE BASE ================= */
-
 body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     background-color: var(--bg-light);
@@ -72,8 +69,6 @@ footer {
     justify-content: space-between;
     align-items: center;
 }
-
-/* ================= BASKET PAGE LAYOUT ================= */
 
 .basket-page {
     flex: 1;
@@ -238,7 +233,7 @@ footer {
 
 /* ปุ่มชำระเงิน ขวาสุดแบบในภาพ */
 
-.checkout-btn {
+.checkout {
     padding: 10px 40px;
     border-radius: 999px;
     border: none;
@@ -250,7 +245,7 @@ footer {
     transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
 }
 
-.checkout-btn:hover {
+.checkout:hover {
     filter: brightness(1.03);
     transform: translateY(-1px);
     box-shadow: 0 6px 14px rgba(255, 79, 47, 0.35);
@@ -278,7 +273,7 @@ footer {
         margin-right: 12px;
     }
 
-    .checkout-btn {
+    .checkout {
         padding: 10px 28px;
     }
 }

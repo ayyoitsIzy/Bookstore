@@ -95,7 +95,7 @@ main {
     font-size: 15px;
     margin-bottom: 16px;
 
-    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .auth-box input:focus {
@@ -158,13 +158,13 @@ main {
     cursor: pointer;
 
     margin-top: 6px;
-    transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
 }
 
 .auth-box button:hover {
     filter: brightness(1.03);
     transform: translateY(-1px);
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.22);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
 }
 
 .register-box button {
