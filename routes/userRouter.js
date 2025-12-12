@@ -4,7 +4,6 @@ const pool = require("../db/connection");
 
 
 
-
 router.get("/user_info", async(req, res) => {
   if (req.session === false || req.session === undefined) {
     res.json({error : true})
@@ -31,12 +30,12 @@ router.post("/login", async(req, res) => {
     }
     console.log(check.at(0));
     console.log(data.password); 
-    if (data.password === check.at(0).password) { 
+    if (data.password === check[0].password) { 
             console.log("correct password");
-            req.session.ID = check.at(0).ID;
+            req.session.ID = check[0].ID;
             req.session.username = check.at(0).First_name;
             req.session.login = true;
-            res.json({success: true});
+            res.json({ success: true });
             return;
     }else{
             console.log("Incorrect password");
@@ -49,13 +48,13 @@ router.post("/login", async(req, res) => {
             res.json({ success: false ,error: "No Phone found"});
             return;
     }
-    console.log(check.at(0).password);
+    console.log(check[0].password);
     console.log(data.password);
     if (data.password === check.at(0).password) { 
             console.log("correct password");
-            req.session.ID = check.at(0).ID;
+            req.session.ID = check[0].ID;
             req.session.login = true;
-            res.json({success: true});
+            res.json({ success: true });
             return;
     }else{
             console.log("Incorrect password");
