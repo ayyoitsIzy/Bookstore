@@ -13,7 +13,7 @@
     --text-main: #222222;
     --text-muted: #666666;
     --border-soft: #e0e0e0;
-    --shadow-soft: 0 4px 16px rgba(0, 0, 0, 0.08);
+    --shadow-soft: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
 body {
@@ -99,7 +99,7 @@ body {
     object-fit: contain;
     background-color: #ffffff;
     border-radius: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .product-info {
@@ -201,8 +201,7 @@ body {
     font-weight: 500;
     cursor: pointer;
 
-    transition: background-color 0.15s ease, color 0.15s ease,
-        box-shadow 0.15s ease, transform 0.1s ease;
+    transition: background-color 0.2s ease, color 0.2s ease,box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .add-to-cart:hover{
@@ -239,12 +238,12 @@ body {
     object-fit: cover;
     padding: 10px;
     cursor: pointer;
-    transition: transform 0.12s ease, box-shadow 0.12s ease,outline 0.12s ease;
+    transition: transform 0.1s ease, box-shadow 0.1s ease,outline 0.1s ease;
 }
 
 .related-list img:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 

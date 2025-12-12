@@ -123,7 +123,7 @@ main {
     display: flex;
     align-items: center;
     gap: 12px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 .filter-label {
     border: none;
@@ -181,12 +181,12 @@ main {
     background: linear-gradient(180deg, #ff861c 0%, #ff7818 100%);
     border-radius: 16px;
     padding: 16px 14px 14px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     cursor: pointer;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    transition: transform 0.20s ease, box-shadow 0.2s ease;
 }
 
 .product-card:hover {
