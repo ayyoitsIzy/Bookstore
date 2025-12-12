@@ -169,12 +169,21 @@ fetch("/basket/get_basket")
 
 
 
-  
-document.getElementsByClassName("checkout")[0].addEventListener("click", () => {
-  fetch("/basket/make_bill", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    credentials: "include",
-    body: JSON.stringify({})
-  });
-});
+
+document.getElementsByClassName("checkout")[0].addEventListener("click",async () =>{
+        let res = await fetch("/basket/make_bill", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: 'include',
+        body: JSON.stringify()
+        });
+
+      const status = await res.json();
+
+      if (status.success) {
+        alert("done");
+        location.reload();
+      } else {
+        alert("error");
+      }
+})

@@ -138,14 +138,12 @@ router.get("/get_basket",async(req,res)=>{
 })
 //make_bill/ if anyone is reading this i swear i will fix it later this is very messy i swear i will fix it..............................................maybe
 router.post("/make_bill",async (req,res)=>{
-    if (!Array.isArray(req.session.basket) || req.session.basket.length === 0) {
-                res.json({success:false});
+    if (!Array.isArray(req.session.basket) || req.session.basket.length === 0 ) {
                 console.log("basket_empty");
                 return;
             }
     let total = 0;
     console.log("make_bill");
-    res.json({ success: true });
     let product_total = new Map();
     let product = [];
     let order = [];
@@ -209,8 +207,9 @@ router.post("/make_bill",async (req,res)=>{
         console.log(thiscustom);
       const [rows] = await pool.query("insert into custom_order ( NAME, faculty, waist, hip, arm, price, status, Bill_ID) value (?,?,?,?,?,?,?,?) "
         ,[thiscustom.name,thiscustom.dept,thiscustom.waist,thiscustom.hip,thiscustom.arm,thiscustom.price,"Pending",bill_id]);
-    }
-    
+      }
+    req.session.basket = [];
+    res.json({ success: true });
     
 
 })
