@@ -46,6 +46,10 @@ fetch("/promotion/promotion_info/"+id)
         const name = document.createElement("span");
         name.className = "product-name"
         name.textContent = data[i].Prod_name;
+      product_info.addEventListener("click",()=>{
+        window.location.href = "/product_info?id=" + data[i].Prod_ID;
+      })
+
         product_info.appendChild(img);
         product_info.appendChild(name);
         table_row.appendChild(product_info);

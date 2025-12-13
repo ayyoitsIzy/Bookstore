@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Custom Order</title>
+    <link rel="stylesheet" href="CSS/Header.css">
+    <link rel="stylesheet" href="CSS/custom.css">
     <script type="text/javascript" src="JS/CustomOrder.js" defer></script>
-
+    <script type="text/javascript" src="JS/header.js" defer></script>
 </head>
 
 <body>
 
 <header class="header">
-    <div class="header-left"><img src="" alt=""></div>
+    <div class="header-left"><img src="IMG\MenuIMG\logo.png" alt=""></div>
     <div class="search-bar"><input type="text" placeholder="Search"></div>
     <div class="header-right"></div>
 </header>
@@ -21,39 +23,50 @@
     <section class="custom-wrapper">
 
         <div class="custom-image">
-            <img src="" alt="">
+            <img src="IMG/MenuIMG/tshirt.png" alt="">
         </div>
 
         <div class="custom-form">
 
             <h2>กรอกรายละเอียดตัดเสื้อช็อป</h2>
 
-            <form>
-
+            
+                <div>
                 <label>ชื่อ-นามสกุล ภาษาอังกฤษ:</label>
                 <input id = "name" type="text">
+                </div> 
 
+                <div>
                 <label>รอบอก:</label>
                 <input id = "breast" type="text">
+                </div>
 
+                <div>
                 <label>รอบเอว:</label>
                 <input id = "waist" type="text">
+                </div>
 
+                <div>
                 <label>รอบแขน:</label>
                 <input id = "arm" type="text">
+                </div>
 
+                <div>
                 <label for="faculty">คณะ:</label>
                         <select id="faculty">
                             <option value="" disabled selected>เลือกคณะ</option>
                             <option value="ENG">วิศวกรรมศาสตร์</option>
                             <option value="SCI">วิทยาศาสตร์</option>
                         </select>
+                </div>
 
+                <div>
                 <label for="department">ภาควิชา:</label>
                         <select id="department" disabled>
                     <option value="" disabled selected>เลือกภาควิชา</option>
                         </select>
-            </form>
+                </div>
+            
 
             <p class="custom-price">450 บาท</p>
 

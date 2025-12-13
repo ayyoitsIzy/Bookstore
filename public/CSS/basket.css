@@ -24,41 +24,6 @@ body {
     flex-direction: column;
 }
 
-.header {
-    background-color: var(--primary);
-    padding: 14px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.header-left img {
-    width: 90px;
-    height: auto;
-}
-
-.search-bar {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    padding: 0 40px;
-}
-
-.search-bar input {
-    width: 100%;
-    max-width: 420px;
-    padding: 10px 16px;
-    border-radius: 24px;
-    border: none;
-    outline: none;
-    background-color: #ffffff;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-    font-size: 14px;
-}
-
-.header-right {
-    min-width: 80px;
-}
 
 footer {
     background-color: var(--primary);
@@ -74,7 +39,7 @@ footer {
     flex: 1;
     max-width: 1120px;
     width: 100%;
-    margin: 24px auto 40px;
+    margin: 130px auto 40px;
     padding: 0 80px 0;
     display: flex;
     flex-direction: column;
@@ -112,22 +77,16 @@ footer {
     font-size: 15px;
 }
 
-.header-row {
-    background-color: #e5e5e5;
-    font-weight: 600;
+.header-row *{
+    display: flex;
+    justify-content: center;
+}
+.header-row > span:nth-child(4) {
+    display: flex;
+    justify-content: flex-end;
 }
 
-/* align หัวคอลัมน์ให้ตรงกับข้อมูล */
-.header-row span:nth-child(1) {
-    text-align: left;
-}
-.header-row span:nth-child(2),
-.header-row span:nth-child(3) {
-    text-align: center;
-}
-.header-row span:nth-child(4) {
-    text-align: right;
-}
+
 
 /* item row layout */
 

@@ -55,7 +55,7 @@ create table image(
 );
 
 create table Custom_Order(
-	Custom_ID NUMERIC PRIMARY KEY,
+	Custom_ID int auto_increment PRIMARY KEY,
     NAME VARCHAR(30),
     faculty ENUM("MECHANICLE","CIVIL","MTH","PHY"),
     waist NUMERIC,

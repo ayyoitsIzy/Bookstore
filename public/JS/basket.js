@@ -110,6 +110,7 @@ fetch("/basket/get_basket")
         total -= unitPrice;
         itemTotal.textContent = localAmount * unitPrice + "฿";
         updateSummary();
+        location.reload();
       });
 
       plus.addEventListener("click", async () => {
@@ -160,6 +161,7 @@ fetch("/basket/get_basket")
         itemCount -= 1;
         basketRow.remove();
         updateSummary();
+        location.reload();
       });
     });
 

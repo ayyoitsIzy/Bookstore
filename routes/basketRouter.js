@@ -206,7 +206,7 @@ router.post("/make_bill",async (req,res)=>{
         const thiscustom = custom[i];
         console.log(thiscustom);
       const [rows] = await pool.query("insert into custom_order ( NAME, faculty, waist, hip, arm, price, status, Bill_ID) value (?,?,?,?,?,?,?,?) "
-        ,[thiscustom.name,thiscustom.dept,thiscustom.waist,thiscustom.hip,thiscustom.arm,thiscustom.price,"Pending",bill_id]);
+        ,[thiscustom.name,thiscustom.dept,thiscustom.waist,thiscustom.breast,thiscustom.arm,thiscustom.price,"Pending",bill_id]);
       }
     req.session.basket = [];
     res.json({ success: true });
