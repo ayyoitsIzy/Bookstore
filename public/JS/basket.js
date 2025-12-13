@@ -71,7 +71,20 @@ fetch("/basket/get_basket")
         minus.style.display = "none";
         plus.style.display = "none";
         itemQty.style.justifyContent = "center";
+        basketItem.addEventListener("click",()=>{
+          window.location.href = "/custom_order";
+        })
       }
+      if ("promotion_ID" in item) {
+          basketItem.addEventListener("click",()=>{
+          window.location.href = "/promotion?id=" + item.promotion_ID;
+        })
+          
+        } else if ("prod_ID" in item) {
+          basketItem.addEventListener("click",()=>{
+          window.location.href = "/product_info?id=" + item.prod_ID;
+        })
+        } 
 
       basketRow.appendChild(itemQty);
 
@@ -119,7 +132,7 @@ fetch("/basket/get_basket")
 
         if ("promotion_ID" in item) {
           url = "/basket/increase_promotion";
-          body.promotion_ID = item.promotion_ID;
+          body.promotion_ID = item.promotion_ID;  
         } else if ("prod_ID" in item) {
           url = "/basket/increase_product";
         } else {

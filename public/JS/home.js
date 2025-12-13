@@ -75,10 +75,15 @@ function setupPromotion() {
         const img = document.createElement("img");
         img.src = src;
         img.alt = "Promotion";
-        container.appendChild(img);
+        container.appendChild(img); 
 
         img.addEventListener("click", () => {
-            window.location.href = "/promotion";
+            if (src === "/IMG/news/news5.png") {
+                window.location.href = "/promotion?id=1";
+            } else {
+                window.location.href = "/promotion?id=2";
+            }
+            
         });
     });
 }
