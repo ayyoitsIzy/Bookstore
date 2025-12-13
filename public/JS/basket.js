@@ -1,180 +1,178 @@
-  let total = 0;
-  
-  fetch("/basket/get_basket")
+let total = 0;
+
+fetch("/basket/get_basket")
   .then(res => res.json())
   .then(data => {
     console.log(data);
-      const item_count = document.getElementsByClassName("item-count")[0]
-      item_count.textContent =  data.length + " รายการ"
-      const basket_table = document.getElementsByClassName("basket-table")[0];
-    for(let i = 0;i<data.length;i++){
-      let localamount = parseInt(data[i].amount);
-      const basket_row = document.createElement("div");
-      basket_row.className - "basket-row"
+    const itemCountEl = document.getElementsByClassName("item-count")[0];
+    let itemCount = data.length;
+    itemCountEl.textContent = itemCount + " รายการ";
+    const basketTable = document.getElementsByClassName("basket-table")[0];
+    const headerRow = document.createElement("div");
+    headerRow.className = "basket-row header-row";
+    const headerLabels = ["รายการ", "ราคาต่อชิ้น", "จำนวน", "ราคารวม", ""];
+    headerLabels.forEach(text => {
+      const span = document.createElement("span");
+      span.textContent = text;
+      headerRow.appendChild(span);
+    });
+    basketTable.appendChild(headerRow);
 
-      const basket_item = document.createElement("div");
-      basket_item.className = "basket-item";
+    const summaryText = document.getElementsByClassName("summary-text")[0];
+    const summaryTotal = document.getElementsByClassName("summary-total")[0];
+
+    function updateSummary(){
+      summaryText.textContent = "รายการสินค้ารวมทั้งสิ้น " + itemCount + " รายการ";
+      summaryTotal.textContent = "ราคาทั้งสิ้น " + total + " ฿";
+    }
+    data.forEach((item, index) => {
+      let localAmount = parseInt(item.amount, 10);
+      const unitPrice = parseInt(item.price, 10);
+
+      const basketRow = document.createElement("div");
+      basketRow.className = "basket-row";
+
+      const basketItem = document.createElement("div");
+      basketItem.className = "basket-item";
 
       const img = document.createElement("img");
-      img.src = data[i].img;
-      const p = document.createElement("p");
-      p.className = "item-name";
-      p.textContent = data[i].prod_name;
+      img.src = item.img;
+      img.alt = item.prod_name || item.name || "";
 
-      basket_item.appendChild(img);
-      basket_item.appendChild(p);
+      const name = document.createElement("p");
+      name.className = "item-name";
+      name.textContent = item.prod_name || item.name || "";
 
-      basket_row.appendChild(basket_item);
+      basketItem.appendChild(img);
+      basketItem.appendChild(name);
+      basketRow.appendChild(basketItem);
 
-      const span = document.createElement("span");
-      span.className = "item-price";
-      span.textContent = data[i].price
-      basket_row.appendChild(span);
+      const spanPrice = document.createElement("span");
+      spanPrice.className = "item-price";
+      spanPrice.textContent = unitPrice + "฿";
+      basketRow.appendChild(spanPrice);
 
-      const item_qty = document.createElement("div");
-      item_qty.className = "item-qty";
+      const itemQty = document.createElement("div");
+      itemQty.className = "item-qty";
+
+      const minus = document.createElement("button");
+      minus.textContent = "−";
 
       const amount = document.createElement("span");
-      amount.textContent = localamount
-      
-      
-      const minus = document.createElement("button");
-      minus.textContent = "-"
-      minus.addEventListener("click",async ()=>{
-        let res =  fetch("/basket/decrease", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: 'include',
-        body: JSON.stringify({index : i})
-        });
-        let status = await res.json;
+      amount.textContent = localAmount;
 
-        amount.textContent -= 1;
-        total -= data[i].price;
-        localamount -= 1
-        item_total.textContent = (localamount) * data[i].price
-        summary_total.textContent = total;
-        if (amount.textContent == 0) {
-          console.log(data.length-1)
-          summary_text.textContent = "รายการรวมทั้งสิ้น " + (data.length-1) + " รายการ"
-          item_count.textContent =  (data.length-1) + " รายการ"
-          console.log("deleted")
-          basket_row.remove;
-          basket_table.removeChild(basket_row);
-          location.reload()
-        }
-      })
-
-      
       const plus = document.createElement("button");
-      plus.textContent = "+"
-      if ("promotion_ID" in data[i]) {
-        plus.addEventListener("click", async()=>{
-          let res = await fetch("/basket/increase_promotion", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          credentials: 'include',
-          body: JSON.stringify({index : i,promotion_ID:data[i].promotion_ID})
-        });
-        const status = await res.json();
-         if (status.success) {
-           console.log(data);
-          total =  parseInt(total) + parseInt(data[i].price);
-          summary_total.textContent = total;
-          localamount += 1;
-          item_total.textContent = (localamount) * data[i].price
-          console.log(localamount);
-          amount.textContent = parseInt(amount.textContent)+1;
-        } else {
-          alert("error");
-        }
-        })
-      } 
-      if ("prod_ID" in data[i]) {
-        plus.addEventListener("click",async ()=>{
-        let res = await fetch("/basket/increase_product", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: 'include',
-        body: JSON.stringify({index : i})
-        });
-        const status = await res.json();
-        if (status.success) {
-           console.log(data);
-          total =  parseInt(total) + parseInt(data[i].price);
-          summary_total.textContent = total;
-          localamount += 1;
-          item_total.textContent = (localamount) * data[i].price
-          console.log(localamount);
-          amount.textContent = parseInt(amount.textContent)+1;
-        } else {
-          alert("error");
-        }
-      }) 
+      plus.textContent = "+";
+
+      itemQty.appendChild(minus);
+      itemQty.appendChild(amount);
+      itemQty.appendChild(plus);
+      if ("name" in item) {
+        minus.style.display = "none";
+        plus.style.display = "none";
+        itemQty.style.justifyContent = "center";
       }
 
-      
+      basketRow.appendChild(itemQty);
 
-      item_qty.appendChild(minus);
-      item_qty.appendChild(amount);
-      item_qty.appendChild(plus);
+      const itemTotal = document.createElement("span");
+      itemTotal.className = "item-total";
+      let lineTotal = localAmount * unitPrice;
+      itemTotal.textContent = lineTotal + "฿";
+      basketRow.appendChild(itemTotal);
 
-      if("name" in data[i])
-        {
-          item_qty.removeChild(minus);
-          item_qty.removeChild(plus);
+      total += lineTotal;
+      const remove = document.createElement("button");
+      remove.className = "delete-item";
+      remove.textContent = "🗑";
+      basketRow.appendChild(remove);
+      basketTable.appendChild(basketRow);
+      minus.addEventListener("click", async () => {
+        if (localAmount <= 1) {
+          remove.click();
+          return;
         }
 
-      const item_total = document.createElement("span");
-      item_total.className = "item-total"
-      item_total.textContent = localamount * data[i].price;
-      total += localamount * data[i].price;
-
-      const remove = document.createElement("button");
-      remove.textContent = "🗑"
-      remove.addEventListener("click",async ()=>{
-        let res = await fetch("/basket/delete", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: 'include',
-        body: JSON.stringify({index : i})
+        const res = await fetch("/basket/decrease", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify({ index })
         });
         const status = await res.json();
-        if (status.success) {
-          total -= localamount * data[i].price;
-          summary_total.textContent = total
-          console.log(data.length-1)
-          summary_text.textContent = "รายการรวมทั้งสิ้น " + (data.length-1) + " รายการ"
-          item_count.textContent =  (data.length-1) + " รายการ"
-          console.log("deleted")
-          basket_row.remove;
-          basket_table.removeChild(basket_row);
-          location.reload()
-        } else {
+        if (!status.success) {
           alert("error");
+          return;
         }
-      })
 
-      basket_row.appendChild(basket_item);
-      basket_row.appendChild(span);
-      basket_row.appendChild(item_qty);
-      basket_row.appendChild(item_total);
-      basket_row.appendChild(remove);
-      basket_table.appendChild(basket_row)
-    }
-    const summary_text = document.getElementsByClassName("summary-text")[0]
-    summary_text.textContent = "รายการรวมทั้งสิ้น " + data.length + " รายการ"
+        localAmount -= 1;
+        amount.textContent = localAmount;
+        total -= unitPrice;
+        itemTotal.textContent = localAmount * unitPrice + "฿";
+        updateSummary();
+        location.reload();
+      });
 
-    const summary_total = document.getElementsByClassName("summary-total")[0];
-    summary_total.textContent = total;
+      plus.addEventListener("click", async () => {
+        let url = "";
+        const body = { index };
 
+        if ("promotion_ID" in item) {
+          url = "/basket/increase_promotion";
+          body.promotion_ID = item.promotion_ID;
+        } else if ("prod_ID" in item) {
+          url = "/basket/increase_product";
+        } else {
+          return;
+        }
+
+        const res = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify(body)
+        });
+        const status = await res.json();
+        if (!status.success) {
+          alert("error");
+          return;
+        }
+
+        localAmount += 1;
+        amount.textContent = localAmount;
+        total += unitPrice;
+        itemTotal.textContent = localAmount * unitPrice + "฿";
+        updateSummary();
+      });
+      remove.addEventListener("click", async () => {
+        const res = await fetch("/basket/delete", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify({ index })
+        });
+        const status = await res.json();
+        if (!status.success) {
+          alert("error");
+          return;
+        }
+
+        total -= localAmount * unitPrice;
+        itemCount -= 1;
+        basketRow.remove();
+        updateSummary();
+        location.reload();
+      });
+    });
+
+    updateSummary();
   })
   .catch(err => console.log("Error:", err));
 
 
 
 
-document.getElementsByClassName("checkout-btn")[0].addEventListener("click",async () =>{
+document.getElementsByClassName("checkout")[0].addEventListener("click",async () =>{
         let res = await fetch("/basket/make_bill", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

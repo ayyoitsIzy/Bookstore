@@ -54,6 +54,7 @@ router.get("/promotion_item/:id", async (req, res) => {
           product.Price
       )
       SELECT 
+        product.Prod_ID,
         product.Prod_name,
         thumbnail.Thumbnail,
         product.Price AS price_per_item,

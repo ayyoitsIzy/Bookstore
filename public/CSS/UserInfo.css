@@ -21,18 +21,10 @@ body {
     display: flex;
     flex-direction: column;
 }
+main {
+    margin-top: 90px;
+}
 
-.header {
-    background-color: var(--primary);
-    padding: 14px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-.header-left img {
-    width: 90px;
-    height: auto;
-}
 .search-bar {
     flex: 1;
     display: flex;
@@ -51,9 +43,7 @@ body {
     box-shadow: 0 3px 8px rgba(0,0,0,0.2);
     font-size: 14px;
 }
-.header-right {
-    min-width: 80px;
-}
+
 .user-info-page {
     flex: 1;
     display: flex;
