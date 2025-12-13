@@ -24,25 +24,6 @@ body {
     flex-direction: column;
 }
 
-.header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-
-    background-color: var(--primary);
-    padding: 14px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    z-index: 10;
-}
-
-.header-left img {
-    width: 90px;
-    height: auto;
-}
-
 .search-bar {
     flex: 1;
     display: flex;
@@ -60,10 +41,6 @@ body {
     background-color: #ffffff;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
     font-size: 14px;
-}
-
-.header-right {
-    min-width: 80px;
 }
 
 .home-page {

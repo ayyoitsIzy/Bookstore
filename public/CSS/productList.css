@@ -24,24 +24,10 @@ body {
 }
 
 main {
-    margin-top: 50px;
+    margin-top: 90px;
 }
 
-.header {
-    position: fixed;
-    width: 100vw;
-    z-index: 1;
-    background-color: var(--primary);
-    padding: 14px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
 
-.header-left img {
-    width: 90px;
-    height: auto;
-}
 
 .search-bar {
     flex: 1;
@@ -62,9 +48,7 @@ main {
     font-size: 14px;
 }
 
-.header-right{
-    min-width: 80px;
-}
+
 
 .user-info-page {
     flex: 1;

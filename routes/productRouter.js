@@ -23,7 +23,7 @@ router.get("/productlist/:page/:orderby", async(req, res)=>{
   }
 
 
-  let sql = "select product.Prod_ID,Prod_name,Price, MIN(Path) as Thumbnail from product inner join image on product.prod_id = image.prod_id group by product.Prod_ID,Prod_name,Price order by " + sqlorder + " limit 18 offset ?;"
+  let sql = "select product.Prod_ID,Prod_name,product_stock,Price, MIN(Path) as Thumbnail from product inner join image on product.prod_id = image.prod_id group by product.Prod_ID,Prod_name,Price order by " + sqlorder + " limit 18 offset ?;"
   const [info] = await pool.query(sql,(pages-1)*18);
   res.json(info)
 })

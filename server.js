@@ -44,7 +44,7 @@ app.use('/promotion',promotionRouter);
 //page route
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+  res.sendFile(path.join(__dirname, "public", "Home.html"));
 
 });
 
@@ -78,11 +78,12 @@ app.get("/custom_order", (req, res) => {
 });
 
 
+
 // Start server
 const PORT = 3000;
-app.listen(PORT, () =>
-  //console.log(`Server running at http://localhost:${PORT}/product?page=1&orderby=latest`)
+app.listen(PORT, () =>{
+  console.log(`Server running at http://localhost:${PORT}/product?page=1&orderby=latest`)
   //console.log(`Server running at http://localhost:${PORT}/promotion?id=1`)
   //console.log(`Server running at http://localhost:${PORT}/product_info?id=1`)
-  console.log(`Server running at http://localhost:${PORT}/custom_order`)
+  console.log(`Server running at http://localhost:${PORT}/custom_order`)}
 );
