@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+     <link rel="stylesheet" href="CSS/home.css">
+    <script type="text/javascript" src="JS/home.js" defer></script>
 </head>
 
 <body>
@@ -27,25 +29,19 @@
 
     <section class="hero-section">
         <div class="hero-list">
-            <img src="" alt="">
+            <img src="/IMG/news/news5.png" alt="Highlight promotion" id="hero-main">
         </div>
     </section>
 
     <section class="category-section">
         <h3>ประเภทสินค้า และ บริการ</h3>
         <div class="category-list">
-            <div class="category-item"></div>
-            <div class="category-item"></div>
-            <div class="category-item"></div>
-            <div class="category-item"></div>
-            <div class="category-item"></div>
         </div>
     </section>
 
     <section class="promotion-section">
         <h3>โปรโมชั่น</h3>
         <div class="promotion-list">
-            <img src="" alt="">
         </div>
     </section>
 
@@ -53,11 +49,12 @@
         <h3>สินค้าแนะนำ</h3>
         <div class="recommended-list">
         </div>
-        <button class="view-all-btn">ดูสินค้าทั้งหมด</button>
+
+        <button class="view-all" onclick="window.location.href='/product?page=1&orderby=latest'">
+            ดูสินค้าทั้งหมด
+        </button>
     </section>
-
 </main>
-
 <footer></footer>
 
 </body>
