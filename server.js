@@ -8,6 +8,7 @@ const userRouter = require("./routes/userRouter");
 const productRouter = require("./routes/productRouter");
 const basketRouter = require("./routes/basketRouter");
 const promotionRouter = require("./routes/promotionRouter");
+const customRouter = require("./routes/customRouter");
 const app = express();
 
 
@@ -36,6 +37,7 @@ app.use('/user',userRouter);
 app.use('/product',productRouter);
 app.use('/basket',basketRouter);
 app.use('/promotion',promotionRouter);
+app.use('/custom',customRouter);
 // Example API data
 
 
@@ -50,6 +52,10 @@ app.get("/", (req, res) => {
 
 app.get("/promotion", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "Promotions.html"));
+
+});
+app.get("/status", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "customStatus.html"));
 
 });
 

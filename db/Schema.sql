@@ -11,13 +11,13 @@ create table discount(
 create table user(
 	First_name varchar(20),
     Last_name varchar(20),
-    Email varchar(50),
+    Email varchar(50) UNIQUE,
     Password varchar(50),
     ID int NOT NULL AUTO_INCREMENT ,
-    Phone Numeric,
+    Phone Numeric UNIQUE,
     User_status Enum("active","inactive"),
     Tier ENUM('member','silver','gold','platinum'),
-    PRIMARY KEY (ID,Email,Phone),
+    PRIMARY KEY (ID),
     foreign key(Tier) references discount(Tier)
 );
 

@@ -19,7 +19,7 @@
     position: fixed;
     width: 100vw;
     background-color: var(--primary);
-    padding: 0px 30px;
+    padding: 5px 30px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -43,7 +43,12 @@
     padding-right: 30px;
 }
 
-.header-right > * {
+.header-right img {
+    cursor: pointer;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.header-left > * {
     cursor: pointer;
     padding-left: 15px;
     padding-right: 15px;

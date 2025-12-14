@@ -90,3 +90,21 @@ footer {
     justify-content: space-between;
     align-items: center;
 }
+
+
+#delete-account{
+    padding: 11px 30px;
+    border-radius: 999px;
+    border: 1.5px solid red;
+    background-color: #ffffff;
+    color: var(--primary);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+}
+#delete-account:hover{
+    background-color: red;
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(255, 79, 47, 0.35);
+    transform: translateY(-1px);
+}

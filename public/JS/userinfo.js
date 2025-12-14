@@ -13,9 +13,30 @@ fetch("/user/user_info")
     phonetextbox.textContent = "เบอร์โทร: " + data.Phone;
     emailtextbox.textContent = "อีเมล: " + data.Email;
     membership_ranktextbox.textContent = "Membership Rank: " + data.Tier;
+    const button = document.createElement("button");
+    button.id = "delete-account"
+    button.textContent = "ลบaccount"
+    button.addEventListener("click",async()=>{
+        res = fetch("/user/delete_account", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              credentials: 'include',
+            
+          })
+        const status = await res.json()
+        if(status.success){
+          alert("done")
+          location.reload();
+        }else{
+          alert("error")
+        }
+      })
+    document.getElementsByClassName("user-details")[0].appendChild(button);
   })
   .catch(err => {
     nametextbox.textContent = "NOT LOGIN!";
     console.log("login first")
     console.log(err)
   });
+
+
