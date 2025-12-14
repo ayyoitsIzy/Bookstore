@@ -1,6 +1,7 @@
 const params = new URLSearchParams(window.location.search);
 let page = parseInt(params.get("page") || "1", 10);
 let orderby = params.get("orderby") || "latest";
+let Category = params.get("category");
 const MAX_PAGE = 30;
 function addtogrid(data) {
     const grid = document.getElementById("product-grid");
@@ -38,8 +39,8 @@ function addtogrid(data) {
     }
 }
 function test() {
-    const url = "/product/productlist/" + page + "/" + orderby;
-
+    const url = "/product/productlist/" + page + "/" + orderby + "/" + Category;
+    console.log(url);
     fetch(url)
         .then(res => res.json())
         .then(data => {
@@ -72,13 +73,13 @@ document.addEventListener("DOMContentLoaded", () => {
     priceSort.addEventListener("change", () => {
         const value = priceSort.value;
         if (!value) return;
-        window.location.href = "/product?page=1&orderby=" + value;
+        window.location.href = "/product?page=1&orderby=" + value + "&category=" + Category;
     });
     popular.addEventListener("click", () => {
-        window.location.href = "/product?page=1&orderby=popular";
+        window.location.href = "/product?page=1&orderby=popular" + "&category=" + Category;
     });
     latest.addEventListener("click", () => {
-        window.location.href = "/product?page=1&orderby=latest";
+        window.location.href = "/product?page=1&orderby=latest" + "&category=" + Category;
     });
 
     if (page <= 1) {
@@ -86,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
         prev.addEventListener("click", () => {
             const newPage = page - 1;
-            window.location.href = "/product?page=" + newPage + "&orderby=" + orderby;
+            window.location.href = "/product?page=" + newPage + "&orderby=" + orderby + "&category=" + Category;
         });
     }
     if (page >= MAX_PAGE) {
@@ -94,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
         next.addEventListener("click", () => {
             const newPage = page + 1;
-            window.location.href = "/product?page=" + newPage + "&orderby=" + orderby;
+            window.location.href = "/product?page=" + newPage + "&orderby=" + orderby + "&category=" + Category;
         });
     }
     test();

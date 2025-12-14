@@ -21,6 +21,9 @@ fetch("/product/product_info/"+id)
     stock.textContent= "*คงเหลือ " + data.Product_stock + "ชิ้น " 
     description.textContent= "รายละเอียด : " + data.description;
     type.textContent = data.Category;
+    type.addEventListener("click",()=>{
+      window.location.href = "/product?page=1&orderby=latest&category="+data.Category
+    })
     increase.addEventListener("click",()=>{
       if(number >= data.Product_stock ){
         alert("too Much!")

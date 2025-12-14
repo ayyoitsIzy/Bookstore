@@ -102,7 +102,7 @@ router.post("/add_custom",async (req,res)=>{
     if (!Array.isArray(req.session.basket)) {
                 req.session.basket = [];
             }
-    req.session.basket.push({amount : 1, price : 450, prod_name : req.body.prod_name , img : "IMG/test.jpg",
+    req.session.basket.push({amount : 1, price : 450, prod_name : req.body.prod_name , img : "IMG/MenuIMG/t-shirt.png",
         name:req.body.name , dept:req.body.dept , breast:req.body.breast , waist:req.body.waist , arm:req.body.arm
      });
     res.json({ success: true });
@@ -136,7 +136,7 @@ router.get("/get_basket",async(req,res)=>{
         res.json([])
     }
 })
-//make_bill/ if anyone is reading this i swear i will fix it later this is very messy i swear i will fix it..............................................maybe
+//make_bill/ 
 router.post("/make_bill",async (req,res)=>{
     if (!Array.isArray(req.session.basket) || req.session.basket.length === 0 ) {
                 console.log("basket_empty");
