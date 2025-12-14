@@ -33,14 +33,17 @@ body {
 }
 
 .custom-image {
-   border: 1px solid #ff861c;
-   border-radius: 40px;
-   padding : 50px;
+    border: 1px solid #ff861c;
+    border-radius: 40px;
+    padding: 40px;
+    width: 100%;
+    max-width: 520px;
 }
 
-.custom-image img{
-    width: 500px;
-   height: auto;
+.custom-image img {
+    display: block;
+    width: 100%;
+    height: auto;
 }
 
 .custom-form {
@@ -57,7 +60,22 @@ body {
     align-items: flex-end;
 }
 
+.error-box {
+    display: none;
+    width: 100%;
+    align-self: stretch;
+    margin-bottom: 16px;
+    padding: 8px;
+    border-radius: 10px;
+    background-color: #ffe0d6;
+    color: #b52b1d;
+    font-size: 10px;
+    line-height: 1.5;
+}
 
+.error-box ul {
+    padding-left: 18px;
+}
 
 
 
@@ -136,21 +154,53 @@ footer {
 }
 
 
-@media (max-width: 992px) {
+@media (max-width: 1024px) {
+    main {
+        height: auto;
+        padding: 20px;
+        align-items: flex-start;
+    }
+
     .custom-wrapper {
-        padding: 0 40px;
         flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        width: 100%;
+    }
+
+     .custom-image {
+        padding: 20px;
+        max-width: 360px;
+        margin: 0 auto;
+    }
+    
+
+    .custom-form {
+        width: 100%;
+        max-width: 480px;
+        margin: 0;
+        padding: 20px;
+    }
+
+    .custom-form {
+        align-items: stretch;
+    }
+
+    .custom-form input,
+    .custom-form select,
+    .add-to-cart-btn {
+        width: 100%;
     }
 }
 
 @media (max-width: 600px) {
-    .custom-wrapper {
-        padding: 0 20px;
+    main {
+        padding: 16px 12px 24px;
     }
 
     footer {
         flex-direction: column;
-        gap: 15px;
+        gap: 10px;
         text-align: center;
     }
 }

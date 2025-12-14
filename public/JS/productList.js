@@ -31,6 +31,24 @@ function addtogrid(data) {
         productcard.appendChild(h4);
         productcard.appendChild(p);
 
+
+        const stock = product.product_stock
+                    console.log(stock)
+                    console.log(data)
+;
+        const isOutOfStock = !isNaN(stock) && stock <= 0
+                    console.log(isOutOfStock)
+;
+
+        if (isOutOfStock) {
+            productcard.classList.add("out-of-stock");
+
+            const badge = document.createElement("div");
+            badge.className = "sold-out-badge";
+            badge.textContent = "สินค้าหมด";
+            productcard.appendChild(badge);
+        }
+
         grid.appendChild(productcard);
 
         productcard.addEventListener("click", () => {

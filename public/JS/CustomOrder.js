@@ -45,6 +45,39 @@ function apply(){
     const breast = parseInt(document.getElementById("breast").value);
     const waist = parseInt(document.getElementById("waist").value);
     const arm = parseInt(document.getElementById("arm").value);
+
+    const errorBox = document.getElementById("error-box");
+    const errors   = [];
+
+    if (!dept) {
+        errors.push("กรุณาเลือกภาควิชา");
+    }
+    if (!name || name.trim() === "") {
+        errors.push("กรุณากรอกชื่อ");
+    }
+    if (Number.isNaN(breast)) {
+        errors.push("กรุณากรอกขนาดรอบอก");
+    }
+    if (Number.isNaN(waist)) {
+        errors.push("กรุณากรอกขนาดเอว");
+    }
+    if (Number.isNaN(arm)) {
+        errors.push("กรุณากรอกขนาดแขน");
+    }
+
+    if (errors.length > 0) {
+        errorBox.innerHTML =
+            "<ul>" + errors.map(msg => `<li>${msg}</li>`).join("") + "</ul>";
+        errorBox.style.display = "block";
+        return;
+    } else {
+        errorBox.style.display = "none";
+    }
+
+    
+
+
+
     console.log(dept);
     console.log(name);
     console.log(breast);
