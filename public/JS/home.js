@@ -24,19 +24,20 @@ function setupCategorie() {
     const container = document.querySelector(".category-list");
     if (!container) return;
 
-    const categories = [
-        { icon: "/IMG/MenuIMG/pen.png",label: "เครื่องเขียน" },
-        { icon: "/IMG/MenuIMG/book2.png",label: "หนังสือ / Textbook" },
-        { icon: "/IMG/MenuIMG/art.png",label: "อุปกรณ์ศิลปะ" },
-        { icon: "/IMG/MenuIMG/tailor.png",label: "รับตัดเสื้อช็อป" },
-        { icon: "/IMG/MenuIMG/more.png",label: "ดูทั้งหมด" }
+  const categories = [
+        { icon: "/IMG/MenuIMG/pen.png",label: "เครื่องเขียน",page:`/product?page=1&orderby=latest&category=Stationery `},
+        { icon: "/IMG/MenuIMG/book2.png",label: "หนังสือ / Textbook",page:`/product?page=1&orderby=latest&category=Books ` },
+        { icon: "/IMG/MenuIMG/art.png",label: "อุปกรณ์ศิลปะ",page: `/product?page=1&orderby=latest&category=Art Supplies `},
+        { icon: "/IMG/MenuIMG/measure-tape.png",label: "Accessories",page: `/product?page=1&orderby=latest&category=Accessories `},
+        { icon: "/IMG/MenuIMG/tailor.png",label: "รับตัดเสื้อช็อป",page: `/custom_order` },
+        { icon: "/IMG/MenuIMG/more.png",label: "ดูทั้งหมด",page: `/product?page=1&orderby=latest `}
     ];
-
     container.innerHTML = "";
 
     categories.forEach(cat => {
         const item = document.createElement("div");
         item.className = "category-item";
+        item.addEventListener("click", () => {window.location.href = cat.page;});
 
         const img = document.createElement("img");
         img.src = cat.icon;
@@ -45,19 +46,14 @@ function setupCategorie() {
         const span = document.createElement("span");
         span.textContent = cat.label;
 
+
         item.appendChild(img);
         item.appendChild(span);
         container.appendChild(item);
 
-        if (cat.label === "รับตัดเสื้อช็อป") {
-            item.addEventListener("click", () => {
-            window.location.href = "/custom_order";
-        });
-        } else {
-            item.addEventListener("click", () => {
-            window.location.href = "/product?page=1&orderby=latest";
-        });
-        }
+       
+        
+     
     });
 }
 
@@ -95,7 +91,7 @@ function loadRecommendedProduct() {
     const list = document.querySelector(".recommended-list");
     if (!list) return;
 
-    fetch("/product/productlist/1/latest")
+    fetch("/product/productlist/1/latest/null")
         .then(res => res.json())
         .then(data => {
             list.innerHTML = "";
@@ -103,9 +99,9 @@ function loadRecommendedProduct() {
                 return;
             }
 
-            const firstNine = data.slice(0, 10);
+            const firstTen = data.slice(0, 10);
 
-            firstNine.forEach(prod => {
+            firstTen.forEach(prod => {
                 const card = document.createElement("div");
                 card.className = "recommended-card";
 

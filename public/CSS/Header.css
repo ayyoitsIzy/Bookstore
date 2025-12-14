@@ -1,3 +1,13 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+
 :root {
     --primary: #ff4f2f;
     --accent: #ff6b5f;
@@ -33,16 +43,32 @@
     padding-right: 30px;
 }
 
-.header-right > * {
+.header-right img {
+    cursor: pointer;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.header-left > * {
+    cursor: pointer;
     padding-left: 15px;
     padding-right: 15px;
 }
 
-
+.header-right{
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
 
 .header-right img {
     height: 60px;
 }
+
+.header-left img:hover {
+    cursor: pointer;
+    height: 60px;
+}
+
+
 
 
 .search-bar {

@@ -43,6 +43,10 @@ body {
     font-size: 14px;
 }
 
+.promotion-list img:hover{
+    cursor: pointer;
+}
+
 .home-page {
     flex: 1;
     padding: 24px 80px 60px;
@@ -93,7 +97,7 @@ body {
     border-radius: 18px;
     padding: 14px 22px;
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(6, minmax(0, 1fr));
     gap: 18px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }

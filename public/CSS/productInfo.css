@@ -44,7 +44,6 @@ body {
     border-radius: 26px;
     box-shadow: var(--shadow-soft);
     padding: 32px 40px 40px;
-
     display: grid;
     grid-template-columns: minmax(0, 380px) minmax(0, 1fr);
     column-gap: 56px;
@@ -162,21 +161,6 @@ body {
     text-align: center;
 }
 
-.add-to-cart{
-    grid-area: cart;
-    justify-self: flex;
-
-    padding: 11px 30px;
-    border-radius: 999px;
-    border: 1.5px solid var(--primary);
-    background-color: #ffffff;
-    color: var(--primary);
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-
-    transition: background-color 0.2s ease, color 0.2s ease,box-shadow 0.2s ease, transform 0.2s ease;
-}
 
 .add-to-cart:hover{
     background-color: var(--primary);
@@ -278,14 +262,27 @@ body {
 .cart-group{
     grid-area: cart;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 10px;
-    width: 240px;
+    width: 500px;
 }
 
 .add-to-cart{
-    justify-self: flex-start;
-    width: 100%;
+    grid-area: cart;
+   
+    padding: 11px 30px;
+    border-radius: 999px;
+    width: 200px;
+    border: 1.5px solid var(--primary);
+    background-color: #ffffff;
+    color: var(--primary);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+
+    transition: background-color 0.2s ease, color 0.2s ease,box-shadow 0.2s ease, transform 0.2s ease;
+   
+    
     height: 42px;
     text-align: center;
 }

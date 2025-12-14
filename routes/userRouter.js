@@ -14,11 +14,6 @@ router.get("/user_info", async(req, res) => {
    res.json(info.at(0));
 });
 
-router.get("/user_session", (req, res) => {
-  console.log("session test");
-  console.log(req.session.user);
-  res.json(req.session.user);
-});
 
 router.post("/login", async(req, res) => {
   let data = req.body;
@@ -33,8 +28,8 @@ router.post("/login", async(req, res) => {
     if (data.password === check[0].password) { 
             console.log("correct password");
             req.session.ID = check[0].ID;
-            req.session.username = check.at(0).First_name;
             req.session.login = true;
+            req.session.basket = [];
             res.json({ success: true });
             return;
     }else{
@@ -54,6 +49,7 @@ router.post("/login", async(req, res) => {
             console.log("correct password");
             req.session.ID = check[0].ID;
             req.session.login = true;
+            req.session.basket = [];
             res.json({ success: true });
             return;
     }else{
@@ -64,6 +60,27 @@ router.post("/login", async(req, res) => {
   }
   
 });
+
+router.post("/logout",(req,res) =>{
+  req.session.basket = []
+  req.session.ID = undefined;
+  req.session.login = false;
+  res.json({success:true});
+})
+
+router.post("/delete_account",async (req,res) =>{
+  const allbill = await pool.query("select Bill_ID from bill where id = ?",req.session.ID);
+  for(let i = 0;i<allbill[0].length;i++){
+    pool.query("update bill set id = null where bill_id = ? ",allbill[0][i].Bill_ID);
+  }
+  pool.query("delete from user where id = ?;",req.session.ID);
+  req.session.basket = []
+  req.session.ID = undefined;
+  req.session.login = false;
+  res.json({success:true});
+})
+
+
 
 router.get("/check_session",(req,res)=>{
   res.json(req.session);
@@ -93,6 +110,7 @@ router.post("/register", async (req, res) => {
   const [getID] = await pool.query("select ID from user where Email = ?",[data.Email]);
   req.session.ID = getID.at(0).ID;
   req.session.login = true;
+  req.session.basket = [];
   res.json({ success: true });
 });
 
