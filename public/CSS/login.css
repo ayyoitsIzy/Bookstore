@@ -132,6 +132,18 @@ main {
     height: 18px;
 }
 
+.auth-error {
+    display: none;
+    width: 100%;
+    margin-bottom: 12px;
+    padding: 6px 10px;
+    border-radius: 10px;
+    background-color: #ffe0d6;
+    color: #b52b1d;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
 .link {
     font-size: 14px;
     color: #555555;
