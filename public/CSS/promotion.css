@@ -135,9 +135,10 @@ footer {
     height: 20px;
     cursor: pointer;
 }
-.promo-quantity .quantity-display{
+.quantity-display{
     font-size: 14px;
     min-width: 24px;
+    max-width: 30px;
     text-align: center;
 }
 

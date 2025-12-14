@@ -25,13 +25,10 @@ function setupCategorie() {
     if (!container) return;
 
     const categories = [
-        { icon: "/IMG/MenuIMG/file.png",label: "เครื่องเขียน" },
+        { icon: "/IMG/MenuIMG/pen.png",label: "เครื่องเขียน" },
         { icon: "/IMG/MenuIMG/book2.png",label: "หนังสือ / Textbook" },
-        { icon: "/IMG/MenuIMG/eraser.png",label: "อุปกรณ์การเรียน" },
-        { icon: "/IMG/MenuIMG/pen.png",label: "ปากกา / ดินสอ" },
-        { icon: "/IMG/MenuIMG/t-shirt.png",label: "เสื้อช็อป / เสื้อยืด" },
+        { icon: "/IMG/MenuIMG/art.png",label: "อุปกรณ์ศิลปะ" },
         { icon: "/IMG/MenuIMG/tailor.png",label: "รับตัดเสื้อช็อป" },
-        { icon: "/IMG/MenuIMG/measure-tape.png",label: "อุปกรณ์ช่างวัด" },
         { icon: "/IMG/MenuIMG/more.png",label: "ดูทั้งหมด" }
     ];
 
@@ -52,9 +49,15 @@ function setupCategorie() {
         item.appendChild(span);
         container.appendChild(item);
 
-        item.addEventListener("click", () => {
+        if (cat.label === "รับตัดเสื้อช็อป") {
+            item.addEventListener("click", () => {
+            window.location.href = "/custom_order";
+        });
+        } else {
+            item.addEventListener("click", () => {
             window.location.href = "/product?page=1&orderby=latest";
         });
+        }
     });
 }
 
@@ -100,7 +103,7 @@ function loadRecommendedProduct() {
                 return;
             }
 
-            const firstNine = data.slice(0, 9);
+            const firstNine = data.slice(0, 10);
 
             firstNine.forEach(prod => {
                 const card = document.createElement("div");

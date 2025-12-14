@@ -153,6 +153,7 @@ body {
 
 .quantity-display{
     min-width: 20px;
+    max-width: 40px;
     text-align: center;
 }
 
