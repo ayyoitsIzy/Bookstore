@@ -1,3 +1,6 @@
+function isStringAllNumbers(str) {
+  return /^\d+$/.test(str);
+}
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 let basket = {};
@@ -103,7 +106,7 @@ fetch("/basket/promotion_limit/"+id)
                   return;
             }
             number += 1;
-            show.textContent = number;
+            show.value = number;
           })
 
           const minusbutton = document.getElementsByClassName("quantity-minus")[0].addEventListener("click",async ()=>{
@@ -112,8 +115,18 @@ fetch("/basket/promotion_limit/"+id)
               return;
             }
             number -= 1;
-            show.textContent = number;
+            show.value = number;
           })
+
+        show.addEventListener("keypress",function(event) {
+        if(event.key === "Enter"){
+             if (show.value > data.max || show.value <= 0 || !isStringAllNumbers(show.value)) {
+                show.value = number;
+             } else {
+              number = parseInt(show.value);
+             }
+        }
+    })
   }))
 
 

@@ -1,3 +1,6 @@
+function isStringAllNumbers(str) {
+  return /^\d+$/.test(str);
+}
 let number = 1;
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
@@ -24,7 +27,7 @@ fetch("/product/product_info/"+id)
         return;
     }
       number += 1;
-      show.textContent = number;
+      show.value = number;
     })
     decrease.addEventListener("click",()=>{
       if(number <= 1 ){
@@ -32,8 +35,18 @@ fetch("/product/product_info/"+id)
         return;
       }
       number -= 1;
-      show.textContent = number;
+      show.value = number;
     })
+    show.addEventListener("keypress",function(event) {
+        if(event.key === "Enter"){
+             if (show.value > data.Product_stock || show.value <= 0 || !isStringAllNumbers(show.value)) {
+                show.value = number;
+             } else {
+              number = parseInt(show.value);
+             }
+        }
+    })
+    
   })
   .catch(err => {
     console.log(err)
