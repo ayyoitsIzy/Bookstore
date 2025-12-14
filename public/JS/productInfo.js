@@ -1,3 +1,6 @@
+function isStringAllNumbers(str) {
+  return /^\d+$/.test(str);
+}
 let number = 1;
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
@@ -35,7 +38,7 @@ fetch("/product/product_info/" + id)
     description.textContent = "รายละเอียด : " + data.description;
     type.textContent = data.Category;
 
-    show.textContent = number;
+    show.value = number;
 
     increase.addEventListener("click", () => {
       if (number >= data.Product_stock) {
@@ -43,27 +46,29 @@ fetch("/product/product_info/" + id)
         return;
       }
       number += 1;
-      show.textContent = number;
+      show.value = number;
       showProductMessage("");
-    });
-
+    })
     decrease.addEventListener("click", () => {
       if (number <= 1) {
-        showProductMessage("ลดไม่ได้แล้ว");
+        showProductMessage("ลดลงไม่ได้แล้ว");
         return;
       }
       number -= 1;
-      show.textContent = number;
-      showProductMessage("");
-    });
+      show.value = number;
+    })
+show.addEventListener("keypress",function(event) {
+        if(event.key === "Enter"){
+             if (show.value > data.Product_stock || show.value  <= 0 ||!isStringAllNumbers(show.value)) {
+                show.value = number;
+             } else {
+              number = parseInt(show.value);
+             }
+        }
+    })
 
-    if (data.Product_stock === 0) {
-      productWrapper.classList.add("out-of-stock");
-      stock.textContent = "สินค้าหมด";
-      addbutton.disabled = true;
-      showProductMessage("สินค้านี้หมดแล้ว ไม่สามารถสั่งซื้อได้");
-    }
   })
+
   .catch(err => {
     console.log(err);
     showProductMessage("โหลดข้อมูลไม่สำเร็จ ลองใหม่อีกครั้ง");
