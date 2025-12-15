@@ -9,6 +9,7 @@ const productRouter = require("./routes/productRouter");
 const basketRouter = require("./routes/basketRouter");
 const promotionRouter = require("./routes/promotionRouter");
 const customRouter = require("./routes/customRouter");
+const commentRouter = require("./routes/commentRouter");
 const app = express();
 
 
@@ -38,7 +39,8 @@ app.use('/product',productRouter);
 app.use('/basket',basketRouter);
 app.use('/promotion',promotionRouter);
 app.use('/custom',customRouter);
-// Example API data
+app.use('/comment',commentRouter);
+
 
 
 
@@ -47,6 +49,11 @@ app.use('/custom',customRouter);
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "Home.html"));
+
+});
+
+app.get("/comment", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "comment.html"));
 
 });
 
