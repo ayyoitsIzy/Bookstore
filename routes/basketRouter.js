@@ -17,6 +17,11 @@ router.post("/add_product",async (req,res)=>{
             const limit = rows[0].product_stock;
             if(req.session.basket[i].amount + req.body.amount < limit ){
                 req.session.basket[i].amount += req.body.amount;
+                // for (let j = 0;j<req.session.productList.length;j++){
+                //     if(req.session.productList[j].prod_ID === req.body.prod_ID){
+                //         req.session.productList[j].amount += req.body.amount
+                //     }
+                // }
                 res.json({ success: true });
             }else{
                 res.json({ success: false});
@@ -25,21 +30,7 @@ router.post("/add_product",async (req,res)=>{
         }
     }
     req.session.basket.push({prod_ID : req.body.prod_ID,amount : req.body.amount});
-
-    for (let i = 0;i<req.session.productList.length;i++){
-        if(req.session.productListt[i].prod_ID === req.body.prod_ID){
-            const [rows] = await pool.query(`select product_stock from product where prod_id =  ?`,req.body.prod_ID);
-            const limit = rows[0].product_stock;
-            if(req.session.productList[i].amount + req.body.amount < limit ){
-                req.session.productList.amount += req.body.amount;
-                res.json({ success: true });
-            }else{
-                res.json({ success: false});
-            }
-            return;
-        }
-    }
-    req.session.productList.push({prod_ID : req.body.prod_ID,amount : req.body.amount});
+    // req.session.productList.push({prod_ID : req.body.prod_ID,amount : req.body.amount});
     console.log(req.session.productList);
     
     res.json({ success: true });
@@ -169,6 +160,7 @@ router.get("/get_basket",async(req,res)=>{
 router.post("/make_bill",async (req,res)=>{
     if (!Array.isArray(req.session.basket) || req.session.basket.length === 0 ) {
                 console.log("basket_empty");
+                res.json({ success: false });
                 return;
             }
     let total = 0;
