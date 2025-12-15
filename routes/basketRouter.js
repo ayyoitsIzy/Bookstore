@@ -24,7 +24,11 @@ router.post("/add_product",async (req,res)=>{
                 // }
                 res.json({ success: true });
             }else{
-                res.json({ success: false});
+                res.status(400).json({
+                    success: false,
+                    message: "Invalid request"
+                    });
+                    res.json({ success: false});
             }
             return;
         }
@@ -32,8 +36,9 @@ router.post("/add_product",async (req,res)=>{
     req.session.basket.push({prod_ID : req.body.prod_ID,amount : req.body.amount});
     // req.session.productList.push({prod_ID : req.body.prod_ID,amount : req.body.amount});
     console.log(req.session.productList);
-    
     res.json({ success: true });
+    
+    
 })
 
 router.post("/increase_product",async (req,res)=>{
@@ -87,6 +92,10 @@ router.post("/add_promotion",async (req,res)=>{
                 req.session.basket[i].amount += req.body.amount;
                 res.json({ success: true });
             }else{
+                res.status(400).json({
+                success: false,
+                message: "Invalid request"
+                });
                 res.json({ success: false });
             }
            
@@ -112,7 +121,7 @@ router.post("/increase_promotion",async (req,res)=>{
         req.session.basket[req.body.index].amount += 1;
         res.json({ success: true });
     } else {
-        res.json({ success: false });
+        res.json({ success: false});
     }
 
 })

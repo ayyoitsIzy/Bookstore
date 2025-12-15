@@ -14,7 +14,7 @@ create table user(
     Email varchar(50) UNIQUE,
     Password varchar(50),
     ID int NOT NULL AUTO_INCREMENT ,
-    Phone Numeric UNIQUE,
+    Phone varchar(10) UNIQUE,
     User_status Enum("active","inactive"),
     Tier ENUM('member','silver','gold','platinum'),
     PRIMARY KEY (ID),
