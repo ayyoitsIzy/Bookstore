@@ -25,7 +25,14 @@ router.get("/productlist/:page/:orderby/:category", async(req, res)=>{
 
   let where = " "
   if( category != undefined && category != "null" ){
-    where  = `where category = "` + category + `" `
+
+    const match = category.match(/^search"([^"]*)"/);
+    if (match) {
+      where = `where Prod_name like "%`+match[1]+`%"` 
+    } else {
+      where  = `where category = "` + category + `" `
+    }
+    
   }
   console.log(where)
   

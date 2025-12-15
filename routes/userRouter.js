@@ -97,7 +97,7 @@ router.post("/register", async (req, res) => {
 
 
   //check if no duplicate phone
-  const [check2] = await pool.query("select Phone from user where Phone = ?",parseInt(data.phone));
+  const [check2] = await pool.query("select Phone from user where Phone = ?",data.phone);
   if (check2.length != 0) { 
     res.json({ success: false ,error: "Duplicate phone"});
     return;
@@ -105,7 +105,7 @@ router.post("/register", async (req, res) => {
 
 
   const sql = 'INSERT INTO user (first_name, Last_name, Email, Password, Phone, User_status, Tier) VALUES (?, ?, ?, ?, ?, "active", "member")';
-  const [rows] = await pool.query(sql,[data.Name,data.Surname,data.Email,data.password,parseInt(data.phone)]);
+  const [rows] = await pool.query(sql,[data.Name,data.Surname,data.Email,data.password,data.phone]);
 
   const [getID] = await pool.query("select ID from user where Email = ?",[data.Email]);
   req.session.ID = getID.at(0).ID;

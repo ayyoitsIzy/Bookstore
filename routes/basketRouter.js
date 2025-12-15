@@ -53,6 +53,18 @@ router.post("/delete",async (req,res)=>{
 })
 
 //promotion//
+router.get("/discount",async (req,res)=>{
+    const id = req.session.ID
+    const info = {type:null,percent:0}
+    const [rows] = await pool.query("select * from discount inner join user on user.Tier = discount.Tier where id = ?",id);
+    info.type = rows[0].Tier
+    info.percent = rows[0].discount
+    res.json(info)
+})
+
+
+
+
 router.post("/add_promotion",async (req,res)=>{
     if (!Array.isArray(req.session.basket)) {
                 req.session.basket = [];
@@ -193,7 +205,11 @@ router.post("/make_bill",async (req,res)=>{
     for(let i = 0;i<product.length;i++){
         const [rows] = await pool.query("update product set product_stock = product_stock - "+ product_total.get(product[i])+" where prod_id = ?;",product[i]);
     }
-    const [bill] = await pool.query("INSERT INTO bill (ID, total_price, date) VALUES(?,?,current_time());",[req.session.ID,total]);
+    const id = req.session.ID
+    const [rows] = await pool.query("select * from discount inner join user on user.Tier = discount.Tier where id = ?",id);
+    const discount = rows[0].discount
+
+    const [bill] = await pool.query("INSERT INTO bill (ID, total_price, date) VALUES(?,?,current_time());",[req.session.ID,total - (total * (discount/100))]);
     const bill_id  = bill.insertId;
     console.log(promotion);
     for(let i = 0;i<promotion.length;i++){
