@@ -94,3 +94,10 @@ async function register() {
    console.log("done2")
   window.location.href = `/user_info`;
 }
+
+function flipToRegister(){
+  document.getElementById("authFlip").classList.add("is-flipped");
+}
+function flipToLogin(){
+  document.getElementById("authFlip").classList.remove("is-flipped");
+}
