@@ -104,6 +104,19 @@ main {
     box-shadow: 0 0 0 3px rgba(255, 107, 95, 0.18);
 }
 
+.auth-select{
+    width:100%;
+    padding:14px 16px;
+    margin-bottom:16px;
+    border:1px solid #ffffff;
+    border-radius:10px;
+    background:#fff;
+    font-size:15px;
+    appearance:none
+}
+.auth-select:focus{
+    outline:0;
+    border-color:var(--accent);}
 .register-box .row {
     display: flex;
     gap: 14px;

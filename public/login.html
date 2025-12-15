@@ -41,6 +41,10 @@
             </div><input id="Mobile phone number" type="text" placeholder="Mobile phone number" required>
             <input id="Email" type="email" placeholder="Email" required>
             <input id="New password" type="password" placeholder="New password" required>
+            <select class="auth-select" id="tier" required>
+            <option value="" disabled selected>Choose tier</option>
+            <option>Member</option><option>Silver</option><option>Gold</option><option>Platinum</option>
+            </select>
             <div id="register-error" class="auth-error"></div>
             <button type="button" onclick="register()">Apply</button>
             <a class="link" href="javascript:void(0)" onclick="flipToLogin()">Back to login</a>
