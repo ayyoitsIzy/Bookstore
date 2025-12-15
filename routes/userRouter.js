@@ -30,6 +30,7 @@ router.post("/login", async(req, res) => {
             req.session.ID = check[0].ID;
             req.session.login = true;
             req.session.basket = [];
+            req.session.productList = []
             res.json({ success: true });
             return;
     }else{
@@ -50,6 +51,7 @@ router.post("/login", async(req, res) => {
             req.session.ID = check[0].ID;
             req.session.login = true;
             req.session.basket = [];
+            req.session.productList = []
             res.json({ success: true });
             return;
     }else{
@@ -63,6 +65,7 @@ router.post("/login", async(req, res) => {
 
 router.post("/logout",(req,res) =>{
   req.session.basket = []
+  req.session.productList = []
   req.session.ID = undefined;
   req.session.login = false;
   res.json({success:true});
@@ -75,6 +78,7 @@ router.post("/delete_account",async (req,res) =>{
   }
   const del = await pool.query("delete from user where id = ?;",req.session.ID);
   req.session.basket = []
+  req.session.productList = []
   req.session.ID = undefined;
   req.session.login = false;
   res.json({success:true});
@@ -97,20 +101,21 @@ router.post("/register", async (req, res) => {
 
 
   //check if no duplicate phone
-  const [check2] = await pool.query("select Phone from user where Phone = ?",parseInt(data.phone));
+  const [check2] = await pool.query("select Phone from user where Phone = ?",data.phone);
   if (check2.length != 0) { 
     res.json({ success: false ,error: "Duplicate phone"});
     return;
   }
 
 
-  const sql = 'INSERT INTO user (first_name, Last_name, Email, Password, Phone, User_status, Tier) VALUES (?, ?, ?, ?, ?, "active", "member")';
-  const [rows] = await pool.query(sql,[data.Name,data.Surname,data.Email,data.password,parseInt(data.phone)]);
+  const sql = 'INSERT INTO user (first_name, Last_name, Email, Password, Phone, User_status, Tier) VALUES (?, ?, ?, ?, ?, "active", ?)';
+  const [rows] = await pool.query(sql,[data.Name,data.Surname,data.Email,data.password,data.phone,data.Tier]);
 
   const [getID] = await pool.query("select ID from user where Email = ?",[data.Email]);
   req.session.ID = getID.at(0).ID;
   req.session.login = true;
   req.session.basket = [];
+  req.session.productList = []
   res.json({ success: true });
 });
 

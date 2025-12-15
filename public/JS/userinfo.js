@@ -16,24 +16,28 @@ fetch("/user/user_info")
     const button = document.createElement("button");
     button.id = "delete-account"
     button.textContent = "ลบaccount"
-    button.addEventListener("click",async()=>{
-        res = fetch("/user/delete_account", {
+    button.addEventListener("click", async () => {
+          try {
+            const res = await fetch("/user/delete_account", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              credentials: 'include',
-            
-          })
-        const status = await res.json()
-        if(status.success){
-          alert("done")
-          location.reload();
-        }else{
-          alert("error")
-        }
-      })
+              credentials: "include",
+            });
+
+            const status = await res.json();
+
+            if (status.success) {
+              location.reload();
+            } else {
+              alert("error");
+            }
+          } catch (err) {
+            console.error(err);
+            alert("network error");
+          }
+        });
     document.getElementsByClassName("user-details")[0].appendChild(button);
-  })
-  .catch(err => {
+  }).catch(err => {
     nametextbox.textContent = "NOT LOGIN!";
     console.log("login first")
     console.log(err)

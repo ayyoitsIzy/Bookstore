@@ -20,10 +20,25 @@ fetch("/basket/get_basket")
 
     const summaryText = document.getElementsByClassName("summary-text")[0];
     const summaryTotal = document.getElementsByClassName("summary-total")[0];
-
+    const originalprice = document.getElementsByClassName("original-price")[0];
     function updateSummary(){
-      summaryText.textContent = "รายการสินค้ารวมทั้งสิ้น " + itemCount + " รายการ";
-      summaryTotal.textContent = "ราคาทั้งสิ้น " + total + " ฿";
+      fetch("/basket/discount")
+      .then(res => res.json())
+      .then(data => {
+      console.log(data);
+      const membertype = data.type
+      const discount = data.percent
+      if (membertype!="member") {
+        originalprice.textContent = total+" ฿";
+        const discountprice = total - (total * (discount/100));
+        summaryText.textContent = "รายการสินค้ารวมทั้งสิ้น " + itemCount + " รายการ"+" ("+membertype+") discount";
+        summaryTotal.textContent = "ราคาทั้งสิ้น " + discountprice + " ฿";
+      } else {
+        summaryText.textContent = "รายการสินค้ารวมทั้งสิ้น " + itemCount + " รายการ";
+        summaryTotal.textContent = "ราคาทั้งสิ้น " + total + " ฿";
+      }
+      
+      })
     }
     data.forEach((item, index) => {
       let localAmount = parseInt(item.amount, 10);
