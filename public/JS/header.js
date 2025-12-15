@@ -6,6 +6,16 @@ img.addEventListener("click",()=>{
         window.location.href = "/login";
     })
 
+const search = document.getElementsByClassName("search-bar")[0]
+
+const search_icon = document.createElement("img");
+search_icon.src = ("/IMG/MenuIMG/search.png");
+search.appendChild(search_icon);
+search_icon.addEventListener("click",()=>{
+  const value = document.querySelector('.search-bar input').value;
+  window.location.href = `/product?page=1&orderby=popular&category=search"`+value+`"`;
+})
+
 
 
 const left = document.getElementsByClassName("header-left")[0]

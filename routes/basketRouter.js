@@ -8,6 +8,7 @@ const session = require('express-session');
 router.post("/add_product",async (req,res)=>{
     if (!Array.isArray(req.session.basket)) {
                 req.session.basket = [];
+                req.session.productList = []
             }
 
     for (let i = 0;i<req.session.basket.length;i++){
@@ -22,10 +23,24 @@ router.post("/add_product",async (req,res)=>{
             }
             return;
         }
-    
-        
     }
     req.session.basket.push({prod_ID : req.body.prod_ID,amount : req.body.amount});
+
+    for (let i = 0;i<req.session.productList.length;i++){
+        if(req.session.productListt[i].prod_ID === req.body.prod_ID){
+            const [rows] = await pool.query(`select product_stock from product where prod_id =  ?`,req.body.prod_ID);
+            const limit = rows[0].product_stock;
+            if(req.session.productList[i].amount + req.body.amount < limit ){
+                req.session.productList.amount += req.body.amount;
+                res.json({ success: true });
+            }else{
+                res.json({ success: false});
+            }
+            return;
+        }
+    }
+    req.session.productList.push({prod_ID : req.body.prod_ID,amount : req.body.amount});
+    console.log(req.session.productList);
     
     res.json({ success: true });
 })
@@ -53,9 +68,22 @@ router.post("/delete",async (req,res)=>{
 })
 
 //promotion//
+router.get("/discount",async (req,res)=>{
+    const id = req.session.ID
+    const info = {type:null,percent:0}
+    const [rows] = await pool.query("select * from discount inner join user on user.Tier = discount.Tier where id = ?",id);
+    info.type = rows[0].Tier
+    info.percent = rows[0].discount
+    res.json(info)
+})
+
+
+
+
 router.post("/add_promotion",async (req,res)=>{
     if (!Array.isArray(req.session.basket)) {
                 req.session.basket = [];
+                req.session.productList = []
             }
 
     for (let i = 0;i<req.session.basket.length;i++){
@@ -101,6 +129,7 @@ router.post("/increase_promotion",async (req,res)=>{
 router.post("/add_custom",async (req,res)=>{
     if (!Array.isArray(req.session.basket)) {
                 req.session.basket = [];
+                req.session.productList = []
             }
     req.session.basket.push({amount : 1, price : 450, prod_name : req.body.prod_name , img : "IMG/MenuIMG/t-shirt.png",
         name:req.body.name , dept:req.body.dept , breast:req.body.breast , waist:req.body.waist , arm:req.body.arm
@@ -193,7 +222,11 @@ router.post("/make_bill",async (req,res)=>{
     for(let i = 0;i<product.length;i++){
         const [rows] = await pool.query("update product set product_stock = product_stock - "+ product_total.get(product[i])+" where prod_id = ?;",product[i]);
     }
-    const [bill] = await pool.query("INSERT INTO bill (ID, total_price, date) VALUES(?,?,current_time());",[req.session.ID,total]);
+    const id = req.session.ID
+    const [rows] = await pool.query("select * from discount inner join user on user.Tier = discount.Tier where id = ?",id);
+    const discount = rows[0].discount
+
+    const [bill] = await pool.query("INSERT INTO bill (ID, total_price, date) VALUES(?,?,current_time());",[req.session.ID,total - (total * (discount/100))]);
     const bill_id  = bill.insertId;
     console.log(promotion);
     for(let i = 0;i<promotion.length;i++){
@@ -209,6 +242,7 @@ router.post("/make_bill",async (req,res)=>{
         ,[thiscustom.name,thiscustom.dept,thiscustom.waist,thiscustom.breast,thiscustom.arm,thiscustom.price,"Pending",bill_id]);
       }
     req.session.basket = [];
+    req.session.productList = []
     res.json({ success: true });
     
 

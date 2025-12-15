@@ -86,6 +86,11 @@ footer {
     justify-content: flex-end;
 }
 
+.original-price{
+    color: grey;
+    text-decoration:line-through;
+}
+
 
 
 /* item row layout */
