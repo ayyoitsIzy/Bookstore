@@ -71,9 +71,9 @@ router.post("/logout",(req,res) =>{
 router.post("/delete_account",async (req,res) =>{
   const allbill = await pool.query("select Bill_ID from bill where id = ?",req.session.ID);
   for(let i = 0;i<allbill[0].length;i++){
-    pool.query("update bill set id = null where bill_id = ? ",allbill[0][i].Bill_ID);
+   const setnull = await pool.query("update bill set id = null where bill_id = ? ",allbill[0][i].Bill_ID);
   }
-  pool.query("delete from user where id = ?;",req.session.ID);
+  const del = await pool.query("delete from user where id = ?;",req.session.ID);
   req.session.basket = []
   req.session.ID = undefined;
   req.session.login = false;
