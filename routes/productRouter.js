@@ -11,7 +11,7 @@ router.get("/productlist/:page/:orderby/:category", async(req, res)=>{
   let sqlorder = "ID";
   console.log(category);
   if(order==="popular"){
-    sqlorder  = "Product_stock"
+    sqlorder  = "order_count desc"
   }
   if(order==="pricedown"){
     sqlorder  = "Price ASC"
@@ -39,9 +39,25 @@ router.get("/productlist/:page/:orderby/:category", async(req, res)=>{
 
 
 
-  let sql = "select product.Prod_ID,Prod_name,product_stock,Price, MIN(Path) as Thumbnail from product inner join image on product.prod_id = image.prod_id " 
-  + where + " group by product.Prod_ID,Prod_name,Price order by " 
-  + sqlorder + " limit 18 offset ?;"
+let sql =
+"SELECT \
+    p.Prod_ID, \
+    p.Prod_name, \
+    p.Product_stock, \
+    p.Price, \
+    MIN(i.Path) AS Thumbnail, \
+    GREATEST(COUNT(o.Bill_ID), 0) AS order_count \
+ FROM product p \
+ INNER JOIN image i ON p.Prod_ID = i.Prod_ID \
+ LEFT JOIN orders o ON p.Prod_ID = o.Prod_ID "
++ where +
+" GROUP BY \
+    p.Prod_ID, \
+    p.Prod_name, \
+    p.Product_stock, \
+    p.Price \
+ ORDER BY " + sqlorder +
+" LIMIT 18 OFFSET ?;";
 
   const [info] = await pool.query(sql,(pages-1)*18);
   res.json(info)
@@ -55,7 +71,19 @@ router.get("/product_info/:id", async(req, res)=>{
   const id = req.params.id
 
   const [info] = await pool.query("select * from product where prod_id = ?;",id);
-  res.json(info[0]);
+  // if (!Array.isArray(req.session.productList)) {
+  //               res.json(info[0]);
+  //           }else{
+  //             for(let i = 0;i<req.session.productList.length;i++){
+  //               if (req.session.productList[i].prod_ID == info[0].Prod_ID) {
+  //                 info[0].Product_stock -= req.session.productList[i].amount;
+  //               } 
+  //           }
+  //           res.json(info[0]);
+  //           }
+ res.json(info[0]);
+  
+  
 })
 
 router.get("/product_img/:id",async(req,res)=>{
