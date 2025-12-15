@@ -93,7 +93,7 @@ function loadRecommendedProduct() {
 
     fetch("/product/productlist/1/latest/null")
         .then(res => res.json())
-        .then(data => {
+        .then(data => { 
             list.innerHTML = "";
             if (!Array.isArray(data) || data.length === 0) {
                 return;
