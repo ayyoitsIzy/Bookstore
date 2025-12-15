@@ -1,0 +1,155 @@
+:root{
+    --p:#ff4f2f;
+    --bg:#f5f5f5;
+    --bd:#e8e8e8;
+    --tx:#222;
+    --mut:#666;
+    --r:14px;
+}
+
+
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font:14px system-ui, sans-serif;
+    background:var(--bg);
+    color:var(--tx);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+footer{
+    margin-top:auto;
+    height:70px;
+    background:var(--p);
+}
+
+.wrap{
+    max-width:980px;
+    width:100%;
+    margin:130px auto 40px;
+    padding:0 22px;
+    display:grid;
+    gap:14px;
+}
+
+
+h2{
+    font-size:26px;
+}
+
+.card{
+    background:#fff;
+    border:1px solid var(--bd);
+    border-radius:var(--r);
+    padding:14px;
+    display:grid;
+    gap:10px;
+}
+
+.card-meta *{
+    width: 100%;
+}
+
+.meta{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+}
+
+.meta span{
+    display:block;
+    font-size:12px;
+    color:var(--mut);
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+}
+
+label{
+    display:grid;
+    gap:6px;
+    font-size:13px;
+    color:var(--mut);
+}
+
+input, select, textarea{
+    padding:10px 11px;
+    border:1px solid var(--bd);
+    border-radius:12px;
+    background:#fff;
+    color:var(--tx);
+    outline:none;
+}
+
+textarea{
+    min-height:120px;
+    resize:vertical;
+}
+
+input:focus,select:focus,textarea:focus{
+    border-color:#ff4f2f77;
+}
+
+.count{
+    font-size:12px;
+    color:var(--mut);
+    text-align:right;
+}
+
+.btn{
+    justify-self:end;
+    padding:10px 16px;
+    border:0;
+    border-radius:12px;
+    background:var(--p);
+    color:#fff;
+    font-weight:650;
+    cursor:pointer;
+}
+
+.msg{
+    display:none;
+    padding:10px 12px;
+    border:1px solid var(--bd);
+    border-radius:12px;
+    font-size:13px;
+}
+
+.msg.ok{
+    display:block;
+    background:#eaffea;
+    color:#176b17;
+}
+
+.msg.err{
+    display:block;
+    background:#fff1ef;
+    color:#8a1f13;
+}
+
+@media(max-width:720px){
+    .meta{
+        grid-template-columns:1fr;
+    }
+    .grid{
+        grid-template-columns:1fr;
+    }
+}

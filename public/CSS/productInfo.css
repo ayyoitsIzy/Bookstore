@@ -29,7 +29,6 @@ body {
 }
 
 
-
 .product-detail-page {
     flex: 1;
     display: flex;
@@ -121,7 +120,13 @@ body {
     margin-top: 8px;
 }
 
+#review-amount{
+    color: grey;
+}
+
 #product-rating {
+    display: flex;
+    flex-direction: row;
     grid-area: rating;
     font-size: 18px;
     color: #ffb400;

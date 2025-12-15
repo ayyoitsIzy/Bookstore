@@ -92,7 +92,12 @@ router.get("/product_img/:id",async(req,res)=>{
   res.json(info);
 })
 
-
+router.get("/star/:id",async(req,res)=>{
+  const id = req.params.id
+  const [info] = await pool.query("select avg(star) as star ,count(orders.Prod_ID) as amount from orders inner join product on orders.Prod_ID = product.prod_ID where product.prod_id = ? group by orders.Prod_ID",id);
+  console.log(info);
+  res.json(info[0]);
+})
 
 
 module.exports = router;

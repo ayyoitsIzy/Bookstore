@@ -56,7 +56,6 @@ footer {
     color: var(--text-main);
 }
 
-/* ================= TABLE ================= */
 
 .basket-table {
     margin-top: 8px;
@@ -66,7 +65,6 @@ footer {
     overflow: hidden;
 }
 
-/* หน้าตัดเท่ากัน: รายการ | ราคาต่อชิ้น | จำนวน | ราคารวม | ถังขยะ */
 .basket-row {
     display: grid;
     grid-template-columns: 3.3fr 1fr 1.3fr 1fr auto;
@@ -93,8 +91,6 @@ footer {
 
 
 
-/* item row layout */
-
 .basket-item {
     display: flex;
     align-items: center;
@@ -113,7 +109,6 @@ footer {
     font-size: 16px;
 }
 
-/* ราคาต่อชิ้น / ราคารวม */
 
 .item-price {
     text-align: center;
@@ -126,7 +121,6 @@ footer {
     font-weight: 500;
 }
 
-/* แคปซูลจำนวน - 1 + ให้ฟีลเหมือนภาพ */
 
 .item-qty {
     justify-self: center;
@@ -157,7 +151,6 @@ footer {
     text-align: center;
 }
 
-/* ปุ่มถังขยะ */
 
 .delete-item {
     border: none;
@@ -168,7 +161,6 @@ footer {
     justify-self: center;
 }
 
-/* ================= SUMMARY BOX ================= */
 
 .basket-summary {
     margin-top: 32px;
@@ -195,7 +187,6 @@ footer {
     margin-right: 24px;
 }
 
-/* ปุ่มชำระเงิน ขวาสุดแบบในภาพ */
 
 .checkout {
     padding: 10px 40px;
@@ -215,7 +206,6 @@ footer {
     box-shadow: 0 6px 14px rgba(255, 79, 47, 0.35);
 }
 
-/* ================= RESPONSIVE ================= */
 
 @media (max-width: 1024px) {
     .basket-page {

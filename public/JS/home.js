@@ -17,7 +17,7 @@ function setupHero() {
         "/IMG/news/news6.png"
     ];
     if (banners.length > 0) {
-        heroImg.src = banners[1];
+        heroImg.src = banners[0];
     }
 }
 function setupCategorie() {

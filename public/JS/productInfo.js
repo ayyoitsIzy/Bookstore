@@ -117,6 +117,25 @@ fetch("/product/product_img/" + id)
     showProductMessage("โหลดรูปสินค้าไม่สำเร็จ");
   });
 
+  fetch("/product/star/" + id)
+  .then(res => res.json())
+  .then(async data => {
+    const rating = document.getElementById("rating");
+    const amount = document.getElementById("review-amount");
+    const star = Math.round(data.star);
+    console.log("rating : "+data.star)
+      const fullStar = "★".repeat(star);
+      const emptyStar = "☆".repeat(5 - star);
+      rating.textContent = fullStar + emptyStar;
+      amount.textContent = `(${data.amount})`;
+  })
+  .catch(err => {
+      const rating = document.getElementById("rating");
+      const amount = document.getElementById("review-amount");
+      rating.textContent = "☆☆☆☆☆"
+      amount.textContent = "(0)";
+  });
+
 const addbutton = document.getElementsByClassName("add-to-cart")[0];
 addbutton.addEventListener("click", async () => {
   if (addbutton.disabled) {
