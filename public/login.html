@@ -12,37 +12,44 @@
     </header>
     <main>
         <section class="auth-container">
-            <div class="auth-box login-box">
-                <h2>Welcome</h2>
-                <form id="login-form">
-                    <input id="username" type="text" placeholder="Mobile phone number or email" required>
-                    <input id="password" type="password" placeholder="Password" required>
-                    <div class="row">
-                        <label>
-                            <input type="checkbox">Remember me
-                        </label>
-                        <a href="#" class="link">Forgot password?</a>
-                    </div>
-                <div id="login-error" class="auth-error"></div>
-                    <button type="button"  onclick="login()">Login</button>
-                </form>
-            </div>
-            <div class="auth-box register-box">
-                <h2>Create a new account</h2>
-                <form id="register-form">
-                    <div class="row">
-                        <input id="Name" type="text" placeholder="Name" required>
-                        <input id="Surname" type="text" placeholder="Surname" required>
-                    </div>
-                    <input id="Mobile phone number" type="text" placeholder="Mobile phone number" required>
-                    <input id="Email" type="email" placeholder="Email" required>
-                    <input id="New password" type="password" placeholder="New password" required>
-                <div id="register-error" class="auth-error"></div>
 
-                    <button type="button" onclick="register()">Apply</button>
-                </form>
+  <div class="flip-card">
+    <div class="flip-inner" id="authFlip">
+      <div class="flip-face flip-front">
+        <div class="auth-box login-box">
+          <h2>Welcome</h2>
+          <form id="login-form">
+            <input id="username" type="text" placeholder="Mobile phone number or email" required>
+            <input id="password" type="password" placeholder="Password" required>
+            <div class="row">
+              <label><input type="checkbox">Remember me</label>
+              <a href="#" class="link">Forgot password?</a>
             </div>
-        </section>
+            <div id="login-error" class="auth-error"></div>
+            <button type="button" onclick="login()">Login</button>
+            <a class="link" href="javascript:void(0)" onclick="flipToRegister()">Create account</a>
+          </form>
+        </div>
+      </div>
+      <div class="flip-face flip-back">
+        <div class="auth-box register-box">
+          <h2>Create a new account</h2>
+          <form id="register-form">
+            <div class="row">
+              <input id="Name" type="text" placeholder="Name" required>
+              <input id="Surname" type="text" placeholder="Surname" required>
+            </div><input id="Mobile phone number" type="text" placeholder="Mobile phone number" required>
+            <input id="Email" type="email" placeholder="Email" required>
+            <input id="New password" type="password" placeholder="New password" required>
+            <div id="register-error" class="auth-error"></div>
+            <button type="button" onclick="register()">Apply</button>
+            <a class="link" href="javascript:void(0)" onclick="flipToLogin()">Back to login</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
     </main>
     <footer>
     </footer>
