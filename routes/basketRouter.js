@@ -10,7 +10,15 @@ router.post("/add_product",async (req,res)=>{
                 req.session.basket = [];
                 req.session.productList = []
             }
+    if (req.session.ID == undefined) {
+        res.status(400).json({
+                    success: false,
+                    message: "Invalid request"
+            });
+        res.json({ success: false});
+        return;
 
+    } 
     for (let i = 0;i<req.session.basket.length;i++){
         if(req.session.basket[i].prod_ID === req.body.prod_ID){
             const [rows] = await pool.query(`select product_stock from product where prod_id =  ?`,req.body.prod_ID);
@@ -81,6 +89,15 @@ router.post("/add_promotion",async (req,res)=>{
                 req.session.basket = [];
                 req.session.productList = []
             }
+    if (req.session.ID == undefined) {
+        res.status(400).json({
+                    success: false,
+                    message: "Invalid request"
+            });
+        res.json({ success: false});
+        return;
+
+    } 
 
     for (let i = 0;i<req.session.basket.length;i++){
         if(req.session.basket[i].promotion_ID === req.body.promotion_ID){
@@ -131,6 +148,14 @@ router.post("/add_custom",async (req,res)=>{
                 req.session.basket = [];
                 req.session.productList = []
             }
+    if (req.session.ID == undefined) {
+        res.status(400).json({
+                    success: false,
+                    message: "Invalid request"
+            });
+        res.json({ success: false});
+        return;
+    } 
     req.session.basket.push({amount : 1, price : 450, prod_name : req.body.prod_name , img : "IMG/MenuIMG/t-shirt.png",
         name:req.body.name , dept:req.body.dept , breast:req.body.breast , waist:req.body.waist , arm:req.body.arm
      });
@@ -172,6 +197,14 @@ router.post("/make_bill",async (req,res)=>{
                 res.json({ success: false });
                 return;
             }
+    if (req.session.ID == undefined) {
+        res.status(400).json({
+                    success: false,
+                    message: "Invalid request"
+            });
+        res.json({ success: false});
+        return;
+    } 
     let total = 0;
     console.log("make_bill");
     let product_total = new Map();

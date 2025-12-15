@@ -41,6 +41,8 @@ create table Bill(
 create table orders(
 	Prod_ID int,
     Bill_ID int,
+    review varchar(500),
+    star numeric(1),
     Amount numeric,
     foreign key (Prod_ID) references Product(Prod_ID),
     foreign key (Bill_ID) references Bill(Bill_ID),
