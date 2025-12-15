@@ -30,11 +30,30 @@ fetch("/product/product_info/" + id)
     const type = document.getElementById("product-type");
     const description = document.getElementById("product-description");
     const productWrapper = document.querySelector(".product-wrapper");
-    const addbutton = document.getElementsByClassName("add-to-cart")[0];
 
     title.textContent = data.Prod_name;
     price.textContent = data.Price + "บาท";
     stock.textContent = "*คงเหลือ " + data.Product_stock + "ชิ้น";
+if (Number(data.Product_stock) <= 0) {
+  addbutton.disabled = true;
+  addbutton.classList.add("disabled");
+
+  increase.disabled = true;
+  decrease.disabled = true;
+  show.disabled = true;
+  number = 0;
+  show.value = 0;
+
+  showProductMessage("สินค้าหมด ไม่สามารถเพิ่มลงตะกร้าได้");
+} else {
+  addbutton.disabled = false;
+  addbutton.classList.remove("disabled");
+
+  increase.disabled = false;
+  decrease.disabled = false;
+  show.disabled = false;
+}
+
     description.textContent = "รายละเอียด : " + data.description;
     type.textContent = data.Category;
      type.addEventListener("click",()=>{
