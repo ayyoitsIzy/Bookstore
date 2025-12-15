@@ -1,3 +1,13 @@
+function showProductMessage(message, type = "error") {
+  const box = document.getElementById("product-message");
+  if (!box) return;
+
+  box.textContent = message || "";
+  box.className = "product-message" + (type === "success" ? " success" : "");
+  box.style.display = message ? "block" : "none";
+}
+
+
 function isStringAllNumbers(str) {
   return /^\d+$/.test(str);
 }
@@ -5,6 +15,8 @@ const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 let basket = {};
 let number = 1;
+let promoMax = null;
+
 const show = document.getElementsByClassName("quantity-display")[0]
 
 fetch("/promotion/promotion_info/"+id)
@@ -79,54 +91,99 @@ fetch("/promotion/promotion_info/"+id)
   }))
 
     
+document.getElementsByClassName("add-promotion")[0]
+  .addEventListener("click", async () => {
 
-const addbutton = document.getElementsByClassName("add-promotion")[0].addEventListener("click",async ()=>{
-   res = fetch("/basket/add_promotion", {
+    try {
+      const res = await fetch("/basket/add_promotion", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        credentials: 'include',
+        credentials: "include",
         body: JSON.stringify({
-            img : basket.img,
-            prod_name : basket.prod_name,
-            promotion_ID:id,
-            price : basket.price,
-            amount:number
+          img: basket.img,
+          prod_name: basket.prod_name,
+          promotion_ID: id,
+          price: basket.price,
+          amount: number
         })
-    })
-    
-})
+      });
+
+      if (!res.ok) {
+        showProductMessage("เพิ่มโปรโมชันลงตะกร้าไม่สำเร็จ");
+        return;
+      }
+
+      showProductMessage("เพิ่มโปรโมชันลงตะกร้าแล้ว", "success");
+    } catch (err) {
+      console.log(err);
+      showProductMessage("เพิ่มโปรโมชันลงตะกร้าไม่สำเร็จ");
+    }
+  });
 
 
-fetch("/basket/promotion_limit/"+id)
-  .then(res => res.json()
+fetch("/basket/promotion_limit/" + id)
+  .then(res => res.json())
   .then(async data => {
-              const plusbutton = document.getElementsByClassName("quantity-plus")[0].addEventListener("click",async ()=>{
-             if(number >= data.max ){
-                  alert("too Much!")
-                  return;
-            }
-            number += 1;
-            show.value = number;
-          })
+    promoMax = Number(data.max);
 
-          const minusbutton = document.getElementsByClassName("quantity-minus")[0].addEventListener("click",async ()=>{
-            if(number <= 1 ){
-              alert("too little!")
-              return;
-            }
-            number -= 1;
-            show.value = number;
-          })
+    const add = document.getElementsByClassName("add-promotion")[0];
+    const plus = document.getElementsByClassName("quantity-plus")[0];
+    const minus = document.getElementsByClassName("quantity-minus")[0];
+    if (!promoMax || promoMax <= 0) {
+      add.disabled = true;
+      add.classList.add("disabled");
 
-        show.addEventListener("keypress",function(event) {
-        if(event.key === "Enter"){
-             if (show.value > data.max || show.value <= 0 || !isStringAllNumbers(show.value)) {
-                show.value = number;
-             } else {
-              number = parseInt(show.value);
-             }
+      plus.disabled = true;
+      minus.disabled = true;
+      show.disabled = true;
+
+      number = 0;
+      show.value = 0;
+
+      showProductMessage("สินค้าหมด ไม่สามารถเพิ่มลงตะกร้าได้");
+      return;
+    } else {
+      add.disabled = false;
+      add.classList.remove("disabled");
+
+      plus.disabled = false;
+      minus.disabled = false;
+      show.disabled = false;
+
+      number = 1;
+      show.value = number;
+      showProductMessage("");
+    }
+
+    plus.addEventListener("click", () => {
+      if (number >= promoMax) {
+        showProductMessage("เกินจำนวนที่กำหนดแล้ว");
+        return;
+      }
+      number += 1;
+      show.value = number;
+      showProductMessage("");
+    });
+
+    minus.addEventListener("click", () => {
+      if (number <= 1) {
+        showProductMessage("ลดลงไม่ได้แล้ว");
+        return;
+      }
+      number -= 1;
+      show.value = number;
+      showProductMessage("");
+    });
+
+    show.addEventListener("keypress", function (event) {
+      if (event.key === "Enter") {
+        if (show.value > promoMax || show.value <= 0 || !isStringAllNumbers(show.value)) {
+          show.value = number;
+          showProductMessage("จำนวนไม่ถูกต้อง");
+        } else {
+          number = parseInt(show.value);
+          showProductMessage("");
         }
-    })
-  }))
-
-
+      }
+    });
+  });
