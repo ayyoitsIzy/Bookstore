@@ -40,24 +40,24 @@ router.get("/productlist/:page/:orderby/:category", async(req, res)=>{
 
 
 let sql =
-"SELECT \
-    p.Prod_ID, \
-    p.Prod_name, \
-    p.Product_stock, \
-    p.Price, \
-    MIN(i.Path) AS Thumbnail, \
-    GREATEST(COUNT(o.Bill_ID), 0) AS order_count \
- FROM product p \
- INNER JOIN image i ON p.Prod_ID = i.Prod_ID \
- LEFT JOIN orders o ON p.Prod_ID = o.Prod_ID "
+`SELECT 
+    p.Prod_ID, 
+    p.Prod_name, 
+    p.Product_stock, 
+    p.Price, 
+    MIN(i.Path) AS Thumbnail, 
+    GREATEST(COUNT(o.Bill_ID), 0) AS order_count 
+ FROM product p 
+ INNER JOIN image i ON p.Prod_ID = i.Prod_ID 
+ LEFT JOIN orders o ON p.Prod_ID = o.Prod_ID `
 + where +
-" GROUP BY \
-    p.Prod_ID, \
-    p.Prod_name, \
-    p.Product_stock, \
-    p.Price \
- ORDER BY " + sqlorder +
-" LIMIT 18 OFFSET ?;";
+` GROUP BY 
+    p.Prod_ID, 
+    p.Prod_name, 
+    p.Product_stock, 
+    p.Price 
+ ORDER BY ` + sqlorder +
+` LIMIT 18 OFFSET ?;`;
 
   const [info] = await pool.query(sql,(pages-1)*18);
   res.json(info)
@@ -94,7 +94,7 @@ router.get("/product_img/:id",async(req,res)=>{
 
 router.get("/star/:id",async(req,res)=>{
   const id = req.params.id
-  const [info] = await pool.query("select avg(star) as star ,count(orders.Prod_ID) as amount from orders inner join product on orders.Prod_ID = product.prod_ID where product.prod_id = ? group by orders.Prod_ID",id);
+  const [info] = await pool.query("select avg(star) as star ,count(orders.Prod_ID) as amount from orders inner join product on orders.Prod_ID = product.prod_ID where not(isnull(star)) and product.prod_id = ?  group by orders.Prod_ID;",id);
   console.log(info);
   res.json(info[0]);
 })
