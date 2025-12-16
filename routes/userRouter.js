@@ -77,6 +77,7 @@ router.post("/delete_account",async (req,res) =>{
    const setnull = await pool.query("update bill set id = null where bill_id = ? ",allbill[0][i].Bill_ID);
   }
   const del = await pool.query("delete from user where id = ?;",req.session.ID);
+  const cancel = await pool.query(`update custom_order inner join bill on bill.bill_id = custom_order.bill_id set status = "Cancelled" where isnull(id)`);
   req.session.basket = []
   req.session.productList = []
   req.session.ID = undefined;

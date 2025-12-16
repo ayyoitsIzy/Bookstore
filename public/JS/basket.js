@@ -31,11 +31,11 @@ fetch("/basket/get_basket")
       if (membertype!="member") {
         originalprice.textContent = total+" ฿";
         const discountprice = total - (total * (discount/100));
-        summaryText.textContent = "รายการสินค้ารวมทั้งสิ้น " + itemCount + " รายการ"+" ("+membertype+") discount";
+        summaryText.textContent = "รายการสินค้ารวมทั้งสิ้น " + itemCount + " รายการ"+" ("+membertype+") " + discount + "% discount";
         summaryTotal.textContent = "ราคาทั้งสิ้น " + discountprice + " ฿";
       } else {
         summaryText.textContent = "รายการสินค้ารวมทั้งสิ้น " + itemCount + " รายการ";
-        summaryTotal.textContent = "ราคาทั้งสิ้น " + total + " ฿";
+        summaryTotal.textContent = "ราคาทั้งสิ้น " + total.toFixed(2) + " ฿";
       }
       
       })

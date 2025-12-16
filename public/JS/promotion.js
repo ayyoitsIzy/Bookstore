@@ -124,11 +124,14 @@ document.getElementsByClassName("add-promotion")[0]
 fetch("/basket/promotion_limit/" + id)
   .then(res => res.json())
   .then(async data => {
-    promoMax = Number(data.max);
+    promoMax = Math.floor(Number(data.max))
+
 
     const add = document.getElementsByClassName("add-promotion")[0];
     const plus = document.getElementsByClassName("quantity-plus")[0];
     const minus = document.getElementsByClassName("quantity-minus")[0];
+    const display_limit = document.getElementById("limit");
+    display_limit.textContent = "*เหลือ "+ Math.floor(promoMax);
     if (!promoMax || promoMax <= 0) {
       add.disabled = true;
       add.classList.add("disabled");

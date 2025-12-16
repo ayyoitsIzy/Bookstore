@@ -7,7 +7,7 @@ router.get("/users_order", async(req, res) => {
   if (req.session === false || req.session === undefined) {
     res.json({error : true})
   }
-   const [info] = await pool.query("select orders.* , product.Prod_name as name from orders inner join bill on orders.Bill_ID = bill.Bill_ID inner join product on product.Prod_ID = orders.Prod_ID where bill.id = ? and review is NULL and review is NULL ",
+   const [info] = await pool.query("select orders.* , bill.date as date , product.Prod_name as name from orders inner join bill on orders.Bill_ID = bill.Bill_ID inner join product on product.Prod_ID = orders.Prod_ID where bill.id = ? and star is NULL ",
     [req.session.ID]);
    console.log(info);
    res.json(info);

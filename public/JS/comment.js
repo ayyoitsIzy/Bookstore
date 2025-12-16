@@ -9,13 +9,14 @@ fetch("/comment/users_order")
         if (!acc[billId]) {
         acc[billId] = {
             bill_id: billId,
+            date: item.date,
             products: []
         };
         }
 
         acc[billId].products.push({
         name: item.name,
-        Prod_ID : item.Prod_ID 
+        Prod_ID : item.Prod_ID,
         });
 
         return acc;
@@ -26,7 +27,13 @@ fetch("/comment/users_order")
     result.forEach(bill => {
     const opt = document.createElement("option");
     opt.value = bill.bill_id;
-    opt.textContent = `Bill #${bill.bill_id}`;
+    console.log(bill.date);
+    const date = new Date(bill.date);
+    const readable = new Intl.DateTimeFormat("en-US", {
+        dateStyle: "medium",
+        timeStyle: "short"
+        }).format(date);
+    opt.textContent = `Bill #${bill.bill_id} {`+readable+"} ";
     billSelect.appendChild(opt);
     });
 

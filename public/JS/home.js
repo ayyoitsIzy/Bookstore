@@ -91,7 +91,7 @@ function loadRecommendedProduct() {
     const list = document.querySelector(".recommended-list");
     if (!list) return;
 
-    fetch("/product/productlist/1/latest/null")
+    fetch("/product/recommended")
         .then(res => res.json())
         .then(data => { 
             list.innerHTML = "";
@@ -99,7 +99,7 @@ function loadRecommendedProduct() {
                 return;
             }
 
-            const firstTen = data.slice(0, 10);
+            const firstTen = data.slice(0, 8);
 
             firstTen.forEach(prod => {
                 const card = document.createElement("div");

@@ -106,6 +106,10 @@ fetch("/user/user_info")
     document.getElementsByClassName("user-details")[0].appendChild(button);
   }).catch(err => {
     nametextbox.textContent = "NOT LOGIN!";
+    last_nametextbox.textContent = ""
+    phonetextbox.textContent = ""
+    emailtextbox.textContent = ""
+    membership_ranktextbox.textContent = ""
     console.log("login first")
     console.log(err)
   });

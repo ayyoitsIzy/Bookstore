@@ -260,7 +260,7 @@ router.post("/make_bill",async (req,res)=>{
     const [rows] = await pool.query("select * from discount inner join user on user.Tier = discount.Tier where id = ?",id);
     const discount = rows[0].discount
 
-    const [bill] = await pool.query("INSERT INTO bill (ID, total_price, date) VALUES(?,?,current_time());",[req.session.ID,total - (total * (discount/100))]);
+    const [bill] = await pool.query("INSERT INTO bill (ID, total_price, date) VALUES(?,?,current_time());", [req.session.ID, Number((total - (total * (discount/100))).toFixed(2))]);
     const bill_id  = bill.insertId;
     console.log(promotion);
     for(let i = 0;i<promotion.length;i++){

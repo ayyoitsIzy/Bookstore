@@ -134,6 +134,10 @@ body {
     margin-bottom: 4px;
 }
 
+#rating{
+    font-weight: bold;
+}
+
 .quantity-section {
     display: inline-flex;
     align-items: center;
