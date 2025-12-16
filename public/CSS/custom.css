@@ -73,7 +73,7 @@ body {
     border-radius: 10px;
     background-color: #ffe0d6;
     color: #b52b1d;
-    font-size: 10px;
+    font-size: 12px;
     line-height: 1.5;
 }
 
@@ -166,6 +166,7 @@ footer {
     }
 
     .custom-wrapper {
+        margin-top: 50px;
         flex-direction: column;
         align-items: center;
         gap: 20px;

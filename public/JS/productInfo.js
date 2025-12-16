@@ -80,7 +80,7 @@ if (Number(data.Product_stock) <= 0) {
     })
 show.addEventListener("keypress",function(event) {
         if(event.key === "Enter"){
-             if (show.value > data.Product_stock || show.value  <= 0 ||!isStringAllNumbers(show.value)) {
+             if (parseInt(show.value) > parseInt(data.Product_stock) || show.value  <= 0 || !isStringAllNumbers(show.value)) {
                 show.value = number;
              } else {
               number = parseInt(show.value);
@@ -124,15 +124,13 @@ fetch("/product/product_img/" + id)
     const amount = document.getElementById("review-amount");
     const star = Math.round(data.star);
     console.log("rating : "+data.star)
-      const fullStar = "★".repeat(star);
-      const emptyStar = "☆".repeat(5 - star);
-      rating.textContent = fullStar + emptyStar;
+      rating.textContent =  Number(data.star).toFixed(2)+"★"
       amount.textContent = `(${data.amount})`;
   })
   .catch(err => {
       const rating = document.getElementById("rating");
       const amount = document.getElementById("review-amount");
-      rating.textContent = "☆☆☆☆☆"
+      rating.textContent = "0☆"
       amount.textContent = "(0)";
   });
 

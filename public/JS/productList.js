@@ -32,7 +32,7 @@ function addtogrid(data) {
         productcard.appendChild(p);
 
 
-        const stock = product.product_stock
+        const stock = product.Product_stock
                     console.log(stock)
                     console.log(data)
 ;

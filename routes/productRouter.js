@@ -46,7 +46,7 @@ let sql =
     p.Product_stock, 
     p.Price, 
     MIN(i.Path) AS Thumbnail, 
-    GREATEST(COUNT(o.Bill_ID), 0) AS order_count 
+    (COUNT(DISTINCT o.Bill_ID)) AS order_count 
  FROM product p 
  INNER JOIN image i ON p.Prod_ID = i.Prod_ID 
  LEFT JOIN orders o ON p.Prod_ID = o.Prod_ID `
@@ -62,6 +62,13 @@ let sql =
   const [info] = await pool.query(sql,(pages-1)*18);
   res.json(info)
 })
+
+router.get("/recommended", async(req, res)=>{
+  const [info] = await pool.query("select p.* , MIN(i.Path) AS Thumbnail FROM product p INNER JOIN image i ON p.Prod_ID = i.Prod_ID where product_stock != 0 GROUP BY p.Prod_ID, p.Prod_name, p.Product_stock, p.Price ");
+  res.json(info)
+})
+
+
 
 
 

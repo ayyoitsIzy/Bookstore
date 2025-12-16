@@ -66,7 +66,7 @@ async function register() {
   const Surname = document.getElementById("Surname").value;
   const phone = document.getElementById("Mobile phone number").value;
   const Email = document.getElementById("Email").value;
-  const Tier = document.getElementById("tier").value;
+  // const Tier = document.getElementById("tier").value;
   
 
   const regErrorBox = document.getElementById("register-error");
@@ -82,7 +82,7 @@ async function register() {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     credentials: 'include',
-    body: JSON.stringify({ password,Name,Surname,phone,Email,Tier})
+    body: JSON.stringify({ password,Name,Surname,phone,Email,Tier:"member"})
   });
 
 

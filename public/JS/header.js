@@ -43,6 +43,12 @@ fetch("/user/user_info")
     basket_icon.addEventListener("click",()=>{
         window.location.href = "/basket";
     })
+
+    const review_icon = document.createElement("img");
+    review_icon.src = ("/IMG/MenuIMG/review.png");
+    review_icon.addEventListener("click",()=>{
+        window.location.href = "/comment";
+    })
     const logout_icon = document.createElement("img");
     logout_icon.src = ("/IMG/MenuIMG/logout.png");
     logout_icon.addEventListener("click",()=>{
@@ -62,6 +68,7 @@ fetch("/user/user_info")
     right.appendChild(logout_icon);
     left.appendChild(basket_icon);
     left.appendChild(status);
+    left.appendChild(review_icon);
   }).catch(()=>{
     div.textContent = "ลงชื่อเข้าใช้"
     div.addEventListener("click",()=>{
