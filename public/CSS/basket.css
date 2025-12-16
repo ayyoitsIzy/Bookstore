@@ -91,6 +91,7 @@ footer {
 
 
 
+
 .basket-item {
     display: flex;
     align-items: center;
@@ -187,7 +188,6 @@ footer {
     margin-right: 24px;
 }
 
-
 .checkout {
     padding: 10px 40px;
     border-radius: 999px;
@@ -205,7 +205,6 @@ footer {
     transform: translateY(-1px);
     box-shadow: 0 6px 14px rgba(255, 79, 47, 0.35);
 }
-
 
 @media (max-width: 1024px) {
     .basket-page {
