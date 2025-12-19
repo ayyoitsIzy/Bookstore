@@ -1,7 +1,6 @@
 fetch("/comment/users_order")
   .then(res => res.json())
   .then(data => {
-    console.log(data);
     const result = Object.values(
     data.reduce((acc, item) => {
         const billId = item.Bill_ID;
@@ -22,6 +21,7 @@ fetch("/comment/users_order")
         return acc;
     }, {})
     );
+    console.log(result);
     const billSelect = document.querySelector(".card-meta select");
 
     result.forEach(bill => {
@@ -57,7 +57,6 @@ fetch("/comment/users_order")
     });
 
 
-    console.log(result);
   document.getElementsByClassName("btn")[0].addEventListener("click",async ()=>{
     const bill_ID = document.querySelector(".card-meta select").value;
     const prod_ID = document.getElementById("prod").value;

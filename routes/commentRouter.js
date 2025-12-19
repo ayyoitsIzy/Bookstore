@@ -16,7 +16,7 @@ router.get("/users_order", async(req, res) => {
 router.post("/post_comment", async(req, res) => {
     const data = req.body;
       const query = `update orders set star = ?, review = ? where prod_id = ? and bill_id = ?`;
-    const [update] = await pool.query(query,[data.rate,data.text,data.prod_ID,data.bill_ID])
+    await pool.query(query,[data.rate,data.text,data.prod_ID,data.bill_ID])
     res.json({success : true})
 });
 

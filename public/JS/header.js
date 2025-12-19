@@ -2,6 +2,7 @@ const right = document.getElementsByClassName("header-right")[0]
 
 const img = document.createElement("img");
 img.src = ("/IMG/MenuIMG/user.png");
+img.id = "profile-pic";
 img.addEventListener("click",()=>{
         window.location.href = "/login";
     })
@@ -13,7 +14,7 @@ search_icon.src = ("/IMG/MenuIMG/search.png");
 search.appendChild(search_icon);
 search_icon.addEventListener("click",()=>{
   const value = document.querySelector('.search-bar input').value;
-  window.location.href = `/product?page=1&orderby=popular&category=search"`+value+`"`;
+  window.location.href = `/product?page=1&orderby=latest&category=search"`+value+`"`;
 })
 
 
@@ -29,7 +30,6 @@ const div = document.createElement("div");
 fetch("/user/user_info")
   .then(res => res.json())
   .then(async data => {
-    console.log(data);
     div.textContent = data.First_name
     div.addEventListener("click",()=>{
     window.location.href = "/user_info";
@@ -66,7 +66,7 @@ fetch("/user/user_info")
       window.location.href = "/status";
     })
     right.appendChild(logout_icon);
-    left.appendChild(basket_icon);
+    right.appendChild(basket_icon);
     left.appendChild(status);
     left.appendChild(review_icon);
   }).catch(()=>{

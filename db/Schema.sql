@@ -30,6 +30,8 @@ create table Product(
     Product_stock NUMERIC
 );
 
+update product set description = "standard calculus book" where prod_id = 26;
+
 create table Bill(
 	ID int,
     Bill_ID int auto_increment primary key,
@@ -68,7 +70,6 @@ create table Custom_Order(
     Bill_ID int,
     foreign key (Bill_ID) references Bill(Bill_ID)
 );
-
 
 create table promotion(
 	Promotion_Name varchar(20),
@@ -129,6 +130,8 @@ INSERT INTO Product (Prod_name, Category, Price, Product_stock) VALUES
 ('Diary Cute Cover', 'Stationery', 120, 150),
 ('Bookmark Metal', 'Accessories', 40, 220),
 ('Book Stand Adjustable', 'Accessories', 180, 95);
+
+update product set description = "standard calculus book" where prod_id = 26;
 
 INSERT INTO image (path, Prod_id) VALUES
 ("IMG/product/1/1.webp",1),
@@ -287,10 +290,15 @@ INSERT INTO discount values ("gold",10);
 INSERT INTO discount values ("platinum",20);
 
 INSERT INTO user (first_name,Last_name,Email,Password,Phone,User_status,Tier)
-VALUES ("jeerawat", "Komsang", "test@gmail.com","test1",021475142,"active","member");
+VALUES ("jeerawat", "Komsang", "test@gmail.com","test1","021475142","active","member");
 
 INSERT INTO user (first_name,Last_name,Email,Password,Phone,User_status,Tier)
-VALUES ("jedsadasdat", "Komasdasdang", "tedasdsad@gmail.com","test1",024276452,"active","member");
+VALUES ("jedsadasdat", "Komasdasdang", "tedasdsad@gmail.com","test1","024276452","active","member");
+
+
+
+INSERT INTO user (first_name,Last_name,Email,Password,Phone,User_status,Tier)
+VALUES ("rich", "makmak", "premium@gmail.com","test1","0933284974","active","gold");
 
 INSERT INTO promotion (Promotion_Name, Price, Banner, Start_Date, End_Date)
 VALUES (
