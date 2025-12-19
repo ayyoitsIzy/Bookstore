@@ -166,12 +166,15 @@ router.get("/get_basket",async(req,res)=>{
     try {
         let temparray = Array.from(req.session.basket)
         for(let i = 0;i<req.session.basket.length;i++){
+        //that thing in basket is a promotion(all nessesary info to use is already provided)
         if("promotion_ID" in temparray[i]){
             continue;
         }
+        //that thing in basket is a custom_product(all nessesary info to use is already provided)
         if("name" in temparray[i]){
             continue;
         }
+        //that thing in basket is a regular_product(info is needed from database)
         const [rows] = await pool.query(`SELECT 
                 product.Prod_ID, Prod_name, Price, MIN(Path) AS Thumbnail
             FROM
@@ -249,9 +252,6 @@ router.post("/make_bill",async (req,res)=>{
              }
          }
      }
-    console.log(product_total);
-    console.log(product);
-    console.log(total);
 
     for(let i = 0;i<product.length;i++){
         const [rows] = await pool.query("update product set product_stock = product_stock - "+ product_total.get(product[i])+" where prod_id = ?;",product[i]);

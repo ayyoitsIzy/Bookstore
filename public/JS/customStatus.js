@@ -39,8 +39,8 @@ fetch("/custom/users_custom")
 
         row.appendChild(name);
         row.appendChild(faculty);
-        row.appendChild(waist);
         row.appendChild(hip);
+        row.appendChild(waist);
         row.appendChild(arm);
         row.appendChild(price);
         row.appendChild(status);

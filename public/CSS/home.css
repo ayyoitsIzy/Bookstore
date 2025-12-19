@@ -234,6 +234,7 @@ footer {
 
 @media (max-width: 1200px) {
     .home-page {
+        margin-top: 60px;
         padding: 20px 24px 40px;
     }
 

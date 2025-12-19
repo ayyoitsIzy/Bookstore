@@ -95,8 +95,6 @@ app.get("/custom_order", (req, res) => {
 // Start server
 const PORT = 3000;
 app.listen(PORT, () =>{
-  console.log(`Server running at http://localhost:${PORT}/product?page=1&orderby=latest`)
-  //console.log(`Server running at http://localhost:${PORT}/promotion?id=1`)
-  //console.log(`Server running at http://localhost:${PORT}/product_info?id=1`)
-  console.log(`Server running at http://localhost:${PORT}/custom_order`)}
+ 
+  console.log(`Server running at http://localhost:${PORT}/`)}
 );

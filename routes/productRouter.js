@@ -78,16 +78,6 @@ router.get("/product_info/:id", async(req, res)=>{
   const id = req.params.id
 
   const [info] = await pool.query("select * from product where prod_id = ?;",id);
-  // if (!Array.isArray(req.session.productList)) {
-  //               res.json(info[0]);
-  //           }else{
-  //             for(let i = 0;i<req.session.productList.length;i++){
-  //               if (req.session.productList[i].prod_ID == info[0].Prod_ID) {
-  //                 info[0].Product_stock -= req.session.productList[i].amount;
-  //               } 
-  //           }
-  //           res.json(info[0]);
-  //           }
  res.json(info[0]);
   
   

@@ -79,7 +79,7 @@ fetch("/promotion/promotion_info/"+id)
 
         const total = document.createElement("span");
         total.className = "item-total";
-        total.textContent = data[i].total
+        total.textContent = data[i].total + "บาท"
 
         table_row.appendChild(unit_price);
         table_row.appendChild(amount);
